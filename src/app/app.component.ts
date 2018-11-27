@@ -8,6 +8,8 @@ import { BoxModule } from 'admin-lte';       //Box component
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'admapp';
+
 }
