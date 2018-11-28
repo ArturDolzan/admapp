@@ -3,7 +3,7 @@
 <li class="dropdown user user-menu" >
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <img src="assets/user2-160x160.jpg" class="user-image" alt="User Image">
-      <span class="hidden-xs">Artur Dolzan Neto</span>
+      <span class="hidden-xs">{{userLogin.Nome}}</span>
     </a>
     <ul class="dropdown-menu" style="width:240px;">
       <!-- User image -->
@@ -11,8 +11,15 @@
         <img src="assets/user2-160x160.jpg" class="img-circle" alt="User Image">
   
         <p>
-          Artur Dolzan Neto
-          <small>Membro desde 2009</small>
+          {{userLogin.Nome}}
+          <ng-container [ngSwitch]="userLogin.Status">
+             <small *ngSwitchCase="'online'"><i class="fa fa-circle text-success"></i> {{userLogin.Status}}</small>
+             <small *ngSwitchCase="'ocupado'"><i class="fa fa-circle text-danger"></i> {{userLogin.Status}}</small>
+             <small *ngSwitchCase="'offline'"><i class="fa fa-circle text-secondary"></i> {{userLogin.Status}}</small>
+
+             <small *ngSwitchDefault><i class="fa fa-circle text-danger"></i> Status não definido</small>
+          </ng-container>
+          
         </p>
       </li>
       <!-- Menu Body -->

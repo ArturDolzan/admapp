@@ -16,7 +16,8 @@ import { UserLoginComponent } from './header/user-login/user-login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import {ROUTES} from './app-routing.module';
-import { AboutComponent } from './settings/about/about.component'
+import { AboutComponent } from './settings/about/about.component';
+import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AboutComponent } from './settings/about/about.component'
     TasksComponent,
     UserLoginComponent,
     DashboardComponent,
-    AboutComponent
+    AboutComponent,
+    MenuSearchComponent
   ],
   imports: [
     BrowserModule,

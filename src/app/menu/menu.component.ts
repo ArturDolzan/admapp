@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServUserLogin } from '../header/user-login/user-login.service';
+import { UserLogin, EnumUserLogin } from '../header/user-login/user-login.model';
 
 @Component({
   selector: 'app-menu',
@@ -6,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private servUserLogin: ServUserLogin) { }
+
+  private enumUserLogin = EnumUserLogin
+  userLogin: UserLogin
 
   ngOnInit() {
+      this.userLogin = this.servUserLogin.recuperarUsuario()
   }
 
 }
