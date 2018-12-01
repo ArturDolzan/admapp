@@ -18,6 +18,8 @@ import { RouterModule } from '@angular/router';
 import {ROUTES} from './app-routing.module';
 import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
+import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,13 @@ import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
