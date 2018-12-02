@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -21,7 +22,8 @@ import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
 import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
-import { TestegridComponent } from './moduloTeste/testegrid/testegrid.component';
+import { MateriaisComponent } from './materiais/materiais.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { TestegridComponent } from './moduloTeste/testegrid/testegrid.component'
     DashboardComponent,
     AboutComponent,
     MenuSearchComponent,
-    TestegridComponent
+    MateriaisComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,8 @@ import { TestegridComponent } from './moduloTeste/testegrid/testegrid.component'
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    HttpClientModule,
+    HttpModule,
     AgGridModule.withComponents(null)
   ],
   providers: [],
