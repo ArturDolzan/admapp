@@ -20,6 +20,8 @@ import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
 import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AgGridModule } from 'ag-grid-angular';
+import { TestegridComponent } from './moduloTeste/testegrid/testegrid.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UserLoginComponent,
     DashboardComponent,
     AboutComponent,
-    MenuSearchComponent
+    MenuSearchComponent,
+    TestegridComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatSortModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AgGridModule.withComponents(null)
   ],
   providers: [],
   bootstrap: [AppComponent]
