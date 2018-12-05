@@ -19,11 +19,15 @@ import { RouterModule } from '@angular/router';
 import {ROUTES} from './app-routing.module';
 import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
-import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogContent, MatDialogModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { MateriaisComponent } from './materiais/materiais.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CadastroMateriaisComponent } from './materiais/cadastro-materiais/cadastro-materiais.component';
+import { InputComponent } from './shared/input/input.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     AboutComponent,
     MenuSearchComponent,
-    MateriaisComponent
+    MateriaisComponent,
+    CadastroMateriaisComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +58,16 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     HttpClientModule,
     HttpModule,
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule,
     AgGridModule.withComponents(null)
+  ],
+  entryComponents:[
+    CadastroMateriaisComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

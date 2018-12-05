@@ -29,7 +29,28 @@ export class MateriaisService {
 
     return this.http.post(`${URL_API}/Materiais/Listar`, body, options)
             .pipe(map(response => response.json().Content), catchError(ErrorHandler.handleError))
-           
-
   }
+
+  save(data: Materiais): Observable<any>{
+    
+    let body = JSON.stringify(data)
+
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); 
+    let options      = new RequestOptions({ headers: headers }); 
+
+    return this.http.post(`${URL_API}/Materiais/Salvar`, body, options)
+      .pipe(map(response => response.json()), catchError(ErrorHandler.handleError))
+  }
+
+  remove(data: Materiais): Observable<any>{
+    
+    let body = JSON.stringify(data)
+
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); 
+    let options      = new RequestOptions({ headers: headers }); 
+
+    return this.http.post(`${URL_API}/Materiais/Remover`, body, options)
+      .pipe(map(response => response.json()), catchError(ErrorHandler.handleError))
+  }
+
 }

@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Material</h2>
+<mat-dialog-content class="mat-typography">
+
+
+     <form [formGroup]="cadForm" novalidate>
+      
+        <div class="row">
+        
+          <div class="col-xs-4">
+            <app-input-container label="Código">
+              <input class="form-control" formControlName="Id" placeholder="Código" autocomplete="off">
+            </app-input-container>
+          </div>
+            <br/>
+          <div class="col-xs-12">
+              
+              <app-input-container label="Descrição" errorMessage="Campo obrigatório" isNew="isNew()">
+                <input class="form-control" formControlName="Descricao" placeholder="Descrição" autocomplete="off" >
+              </app-input-container>
+          </div>
+
+          <div class="col-xs-12">
+              <app-input-container label="Quantidade" errorMessage="Campo obrigatório e somente números" isNew="isNew()">
+                <input type="number" class="form-control" formControlName="Quantidade" placeholder="Quantidade" autocomplete="off" >
+              </app-input-container>
+            </div>
+  
+            <div class="col-xs-12">
+                <app-input-container label="Valor Unitário" errorMessage="Campo obrigatório e somente números" isNew="isNew()">
+                  <input type="number" class="form-control" formControlName="ValorUnitario" placeholder="Valor Unitário" autocomplete="off" >
+                </app-input-container>
+            </div>
+
+        </div>
+
+      </form> 
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="row">
+        <div class="col-xs-12" >
+
+            <button  class="btn btn-primary  btn-space" (click)="save()" [disabled]="!cadForm.valid">
+                <i class="fa fa-save"></i> Salvar
+            </button>
+
+            <button  class="btn btn-danger btn-space" (click)="remove()" [disabled]="isNew()">
+                <i class="fa fa-trash"></i> Remover
+            </button>
+
+            <button  class="btn btn-secundary pull-right" (click)="close()">
+                <i class="fa fa-window-close"></i> Fechar
+            </button>
+
+        </div>
+      </div>
+</mat-dialog-actions>

@@ -6,7 +6,7 @@ export class ErrorHandler {
         let errorMessage: string
 
         if(error instanceof Response){
-            errorMessage = `Erro ${error.status} ao acessar a URL ${error.url} - ${error.statusText}`
+            errorMessage = `Erro ${error.status} ao acessar a URL ${error.url} - ${error.statusText} - ${JSON.parse(error._body).Mensagem}`
         }else{
             errorMessage = error.toString()
         }

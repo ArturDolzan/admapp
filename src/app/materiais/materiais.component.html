@@ -1,34 +1,49 @@
-<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
- 
-    <ng-container matColumnDef="Codigo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.Id}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Descricao">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Descricao </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.Descricao}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Quantidade">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantidade </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.Quantidade}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Valorunitario">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Valor unitario </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.ValorUnitario}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Observacao">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Observacao </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.Observacao}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Ativo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </mat-header-cell>
-      <mat-cell *matCellDef="let materiais"> {{materiais.Ativo}} </mat-cell>
-    </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<div class="btn-group with-margin" role="group" >
+    <button (click)="onNewClick()" class="btn btn-primary">Novo</button>               
+    <button  class="btn btn-secondary">Opções</button>    
+    
+</div>
 
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-      (click)="onRowClicked(row)">
-    </mat-row>
+  <div class="row">
+      <div class="col-xs-12">
 
-  </mat-table>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="Codigo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.Id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Descricao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.Descricao}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Quantidade">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Quantidade </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.Quantidade}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Valorunitario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Unitário (R$) </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.ValorUnitario |  currency: 'BRL': true}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Observacao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Observação </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.Observacao}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Ativo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </mat-header-cell>
+          <mat-cell *matCellDef="let materiais"> {{materiais.Ativo}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns; " 
+          [ngClass]="{'highlight': selectedRowIndex == row.Id}"
+          (click)="onRowClicked(row)"
+          (dblclick)="onDblClicked(row)">
+        </mat-row>
+
+      </mat-table>
+
+  </div>
+</div>

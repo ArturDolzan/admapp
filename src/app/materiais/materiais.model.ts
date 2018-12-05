@@ -1,4 +1,4 @@
-export interface Materiais {
+export class Materiais {
     Id: number
     Descricao: string
     Quantidade: number

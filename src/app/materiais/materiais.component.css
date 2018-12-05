@@ -5,3 +5,11 @@ table {
   th.mat-sort-header-sorted {
     color: black;
   }
+
+  .highlight{
+    background: #9DDEF5;
+  }
+
+  .with-margin {
+    margin-bottom: 8px;
+  }
