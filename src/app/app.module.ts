@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
 import {ROUTES} from './app-routing.module';
 import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
-import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogContent, MatDialogModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogContent, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { MateriaisComponent } from './materiais/materiais.component';
@@ -59,6 +59,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     HttpModule,
     CommonModule, 
@@ -72,4 +74,4 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

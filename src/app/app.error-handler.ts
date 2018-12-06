@@ -5,11 +5,11 @@ export class ErrorHandler {
     static handleError(error: Response | any){
         let errorMessage: string
 
-        if(error instanceof Response){
+        //if(error instanceof Response){
             errorMessage = `Erro ${error.status} ao acessar a URL ${error.url} - ${error.statusText} - ${JSON.parse(error._body).Mensagem}`
-        }else{
-            errorMessage = error.toString()
-        }
+     //   }else{
+      //      errorMessage = error.toString()
+      //  }
 
         console.log(errorMessage)
 

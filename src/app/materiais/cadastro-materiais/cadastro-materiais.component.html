@@ -31,27 +31,31 @@
                 </app-input-container>
             </div>
 
+            <div class="col-xs-12">
+              <app-input-container label="Observação" isNew="isNew()">
+                  <textarea  class="form-control" formControlName="Observacao" placeholder="Observação" autocomplete="off"></textarea>
+              </app-input-container>
+            </div>
+
         </div>
 
       </form> 
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <div class="row">
-        <div class="col-xs-12" >
+    
+      <button  class="btn btn-danger btn-space" (click)="remove()" [disabled]="isNew()">
+          <i class="fa fa-trash"></i> Remover
+      </button>
 
-            <button  class="btn btn-primary  btn-space" (click)="save()" [disabled]="!cadForm.valid">
-                <i class="fa fa-save"></i> Salvar
-            </button>
+      <span class="spacer"></span>
 
-            <button  class="btn btn-danger btn-space" (click)="remove()" [disabled]="isNew()">
-                <i class="fa fa-trash"></i> Remover
-            </button>
+      <button  class="btn btn-primary btn-space" (click)="save()" [disabled]="!cadForm.valid">
+          <i class="fa fa-save"></i> Salvar
+      </button>
 
-            <button  class="btn btn-secundary pull-right" (click)="close()">
-                <i class="fa fa-window-close"></i> Fechar
-            </button>
+      <button  class="btn btn-secundary pull-right" (click)="close()">
+          <i class="fa fa-window-close"></i> Fechar
+      </button>
 
-        </div>
-      </div>
 </mat-dialog-actions>

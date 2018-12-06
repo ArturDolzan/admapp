@@ -33,7 +33,8 @@ export class CadastroMateriaisComponent implements OnInit {
       Id: this.formBuilder.control({value: this.data.Id, disabled: true}, [Validators.required]),
       Descricao: this.formBuilder.control(this.data.Descricao, [Validators.required]),
       Quantidade: this.formBuilder.control(this.data.Quantidade, [Validators.required, Validators.pattern(this.numberPattern)]),
-      ValorUnitario: this.formBuilder.control(this.data.ValorUnitario, [Validators.required, Validators.pattern(this.decimalPattern)])
+      ValorUnitario: this.formBuilder.control(this.data.ValorUnitario, [Validators.required, Validators.pattern(this.decimalPattern)]),
+      Observacao: this.formBuilder.control(this.data.Observacao)
     })
 
   }
