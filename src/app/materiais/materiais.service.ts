@@ -16,12 +16,12 @@ export class MateriaisService {
 
   constructor(private http: Http) { }
 
-  materiais(): Observable<Materiais[]>{
+  materiais(start: number, limit: number, page: number): Observable<any[]>{
 
     let body = JSON.stringify({
-      Start: 1,
-      Limit: 5,
-      Page: 1
+      Start: start,
+      Limit: limit,
+      Page: page
     })
 
     let headers      = new Headers({ 'Content-Type': 'application/json' }); 

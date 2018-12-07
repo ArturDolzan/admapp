@@ -5,7 +5,7 @@ import { MateriaisService } from './materiais.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CadastroMateriaisComponent } from './cadastro-materiais/cadastro-materiais.component';
 import { map, filter, scan, tap, merge, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
+import { fromEvent, pipe } from 'rxjs';
 
 
 @Component({
@@ -34,11 +34,11 @@ export class MateriaisComponent  implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit() {    
+  ngOnInit() {       
   }
 
-  ngAfterViewInit() {
-        
+  ngAfterViewInit() {      
+
     this.list()
 
     fromEvent(this.input.nativeElement,'keyup')
@@ -46,19 +46,19 @@ export class MateriaisComponent  implements OnInit, AfterViewInit {
                 debounceTime(150),
                 distinctUntilChanged(),
                 tap(data => {
-                    this.paginator.pageIndex = 0;
                     
+                    alert('Implementar...')
                 })
             )
             .subscribe();
 
     this.sort.sortChange.subscribe(data => {
-      this.paginator.pageIndex = 0      
+      alert('Implementar...')
     });
 
     this.paginator.page.pipe( tap(data => { 
       
-      
+      this.list()
      })).subscribe()
 }
 
@@ -66,14 +66,21 @@ export class MateriaisComponent  implements OnInit, AfterViewInit {
 
     let filterValue = this.input.nativeElement.value
     
+    let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
-    this.materiaisService.materiais().subscribe( conteudo=> this.cbList(conteudo) )
+    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex).subscribe( conteudo=> this.cbList(conteudo))
   }
 
   cbList(data){
     this.loading = false
-    this.dataSource = data
+
+    this.paginator.length = data.Total
+    this.dataSource = data.Dados
+  }
+
+  onList(){
+    this.list()
   }
 
   onRowClicked(row) {

@@ -1,3 +1,9 @@
+.formSearchWidth480 {
+  width: 480px;
+}
+
+.spacer {flex: 1 1 auto;}
+
 table {
     width: 100%;
   }
@@ -58,5 +64,4 @@ mat-header-cell:nth-child(6) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
 }

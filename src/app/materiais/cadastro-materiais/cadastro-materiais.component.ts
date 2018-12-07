@@ -3,12 +3,15 @@ import { Materiais } from '../materiais.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MateriaisService } from '../materiais.service';
+import { NotificationService } from '../../shared/messages/notification.service';
 
 @Component({
   selector: 'app-cadastro-materiais',
   templateUrl: './cadastro-materiais.component.html',
   styleUrls: ['./cadastro-materiais.component.css']
 })
+
+
 export class CadastroMateriaisComponent implements OnInit {
 
   cadForm: FormGroup
@@ -21,6 +24,7 @@ export class CadastroMateriaisComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
               private dialogRef: MatDialogRef<CadastroMateriaisComponent>,
               private materiaisService: MateriaisService,
+              private notificationService: NotificationService,
               @Inject(MAT_DIALOG_DATA) data) { 
 
                  this.data = data;
@@ -48,7 +52,7 @@ export class CadastroMateriaisComponent implements OnInit {
     this.materiaisService.save(this.cadForm.getRawValue())
         .subscribe(response => {
           
-          console.log(response.Mensagem)
+          this.notificationService.notify(response.Mensagem)
 
           this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: true, isRemoved: false})
         })
@@ -59,7 +63,7 @@ export class CadastroMateriaisComponent implements OnInit {
     this.materiaisService.remove(this.cadForm.getRawValue())
     .subscribe(response => {
       
-      console.log(response.Mensagem)
+      this.notificationService.notify(response.Mensagem)
 
       this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: false, isRemoved: true})
     })    

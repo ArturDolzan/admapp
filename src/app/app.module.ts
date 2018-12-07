@@ -28,6 +28,8 @@ import { CadastroMateriaisComponent } from './materiais/cadastro-materiais/cadas
 import { InputComponent } from './shared/input/input.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
+import { NotificationService } from './shared/messages/notification.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MenuSearchComponent,
     MateriaisComponent,
     CadastroMateriaisComponent,
-    InputComponent
+    InputComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   entryComponents:[
     CadastroMateriaisComponent
   ],
-  providers: [],
+  providers: [NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
