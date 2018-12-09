@@ -56,7 +56,7 @@
         </ng-container>
         <ng-container matColumnDef="Ativo">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </mat-header-cell>
-          <mat-cell *matCellDef="let materiais"> {{materiais.Ativo}} </mat-cell>
+          <mat-cell *matCellDef="let materiais"> {{enumAtivo(materiais.Ativo)}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

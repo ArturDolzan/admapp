@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { NotificationService } from './shared/messages/notification.service';
+import { RadioComponent } from './shared/radio/radio.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NotificationService } from './shared/messages/notification.service';
     MateriaisComponent,
     CadastroMateriaisComponent,
     InputComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    RadioComponent
   ],
   imports: [
     BrowserModule,

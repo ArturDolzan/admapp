@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatDialogConfig, MatDialog, MatPaginator, MatSort} from '@angular/material';
-import { Materiais } from './materiais.model';
+import { Materiais, EnumMateriaisAtivo } from './materiais.model';
 import { MateriaisService } from './materiais.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CadastroMateriaisComponent } from './cadastro-materiais/cadastro-materiais.component';
@@ -13,9 +13,10 @@ import { fromEvent, pipe } from 'rxjs';
   templateUrl: './materiais.component.html',
   styleUrls: ['./materiais.component.css']
 })
-export class MateriaisComponent  implements OnInit, AfterViewInit {
+export class MateriaisComponent implements OnInit, AfterViewInit {
 
   materiais: Materiais[]
+  enumMateriaisAtivo = EnumMateriaisAtivo
 
   displayedColumns: string[] = ['actionsColumn', 'Codigo', 'Descricao', 'Quantidade', 'Valorunitario', 'Observacao', 'Ativo']
   dataSource
@@ -32,6 +33,10 @@ export class MateriaisComponent  implements OnInit, AfterViewInit {
   constructor(private materiaisService: MateriaisService, 
               private dialog: MatDialog) { 
 
+  }
+
+  enumAtivo(value){
+    return this.enumMateriaisAtivo[value]
   }
 
   ngOnInit() {       
@@ -95,6 +100,7 @@ export class MateriaisComponent  implements OnInit, AfterViewInit {
   onNewClick() {
     let mat = new Materiais()
     mat.Id = 0
+    mat.Ativo = this.enumMateriaisAtivo.Sim
     this.openDialog(mat)
   }
 

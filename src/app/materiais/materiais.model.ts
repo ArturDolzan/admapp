@@ -8,6 +8,6 @@ export class Materiais {
 }
 
 export enum EnumMateriaisAtivo {
-    Ativo = 1,
-    Desativado = 0
+    Sim = 1,
+    Nao = 0
 }
