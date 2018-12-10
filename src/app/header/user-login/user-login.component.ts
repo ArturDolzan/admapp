@@ -14,7 +14,7 @@ export class UserLoginComponent implements OnInit {
   private enumUserLogin = EnumUserLogin
   userLogin: UserLogin
 
-  ngOnInit() {
+  ngOnInit() {    
     this.userLogin = this.servUserLogin.recuperarUsuario()
   }
 

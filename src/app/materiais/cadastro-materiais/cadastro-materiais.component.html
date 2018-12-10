@@ -15,7 +15,9 @@
           <div class="col-xs-6">
 
               <app-input-container errorMessage="Campo obrigatório">
-                 <app-radio [options]="opcoesAtivo" formControlName="Ativo"></app-radio>
+                 <!-- <app-radio [options]="opcoesAtivo" formControlName="Ativo"></app-radio> -->
+
+                 <app-link-ativo-inativo [status]="opcoesAtivo" formControlName="Ativo">  </app-link-ativo-inativo>
               </app-input-container>
 
           </div>

@@ -8,13 +8,16 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map, catchError} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import { ErrorHandler } from '../app.error-handler';
+import { AppHeaders } from '../shared/auth/app-headers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MateriaisService {
+export class MateriaisService extends AppHeaders {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    super()
+   }
 
   materiais(start: number, limit: number, page: number): Observable<any[]>{
 
@@ -24,7 +27,7 @@ export class MateriaisService {
       Page: page
     })
 
-    let headers      = new Headers({ 'Content-Type': 'application/json' }); 
+    let headers      = this.getHeaders();
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Listar`, body, options)
@@ -35,7 +38,7 @@ export class MateriaisService {
     
     let body = JSON.stringify(data)
 
-    let headers      = new Headers({ 'Content-Type': 'application/json' }); 
+    let headers      = this.getHeaders();
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Salvar`, body, options)
@@ -46,7 +49,7 @@ export class MateriaisService {
     
     let body = JSON.stringify(data)
 
-    let headers      = new Headers({ 'Content-Type': 'application/json' }); 
+    let headers      = this.getHeaders();
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Remover`, body, options)

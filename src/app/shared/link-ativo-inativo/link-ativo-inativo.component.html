@@ -1,0 +1,4 @@
+<div class="row">
+    <span *ngIf="estaAtivo()" (click)="clicouAtivo()" style="color: #0000EE; cursor: pointer;"> Desativar </span>
+    <span *ngIf="!estaAtivo()" (click)="clicouInativo()" style="color: #0000EE; cursor: pointer;"> Ativar </span>
+</div>

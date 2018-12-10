@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { NotificationService } from './shared/messages/notification.service';
 import { RadioComponent } from './shared/radio/radio.component';
+import { LinkAtivoInativoComponent } from './shared/link-ativo-inativo/link-ativo-inativo.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RadioComponent } from './shared/radio/radio.component';
     CadastroMateriaisComponent,
     InputComponent,
     SnackbarComponent,
-    RadioComponent
+    RadioComponent,
+    LinkAtivoInativoComponent
   ],
   imports: [
     BrowserModule,

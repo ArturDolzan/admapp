@@ -2,7 +2,7 @@
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
     <!-- Sidebar user panel -->
-    <div class="user-panel">
+    <!-- <div class="user-panel">
       <div class="pull-left image">
         <img src="assets/user2-160x160.jpg" class="img-circle" alt="User Image">
       </div>
@@ -16,7 +16,7 @@
           <small *ngSwitchDefault><i class="fa fa-circle text-danger"></i> Status não definido</small>
        </ng-container>
       </div>
-    </div>
+    </div> -->
     <!-- search form -->
     <app-menu-search></app-menu-search>
     <!-- /.search form -->
@@ -24,9 +24,9 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU</li>
 
-      <li><a href="#"><i class="fa fa-dashboard active"></i> <span>Home</span></a></li>
+      <li><a [routerLink]="''"><i class="fa fa-dashboard active"></i> <span>Home</span></a></li>
 
-      <li class="treeview">
+      <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-files-o"></i>
           <span>Layout Options</span>
@@ -48,8 +48,8 @@
             <small class="label pull-right bg-green">new</small>
           </span>
         </a>
-      </li>
-      <li class="treeview">
+      </li> -->
+      <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-pie-chart"></i>
           <span>Charts</span>
@@ -93,20 +93,19 @@
           <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
           <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
         </ul>
-      </li>
+      </li> -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-table"></i> <span>Tables</span>
+          <i class="fa fa-table"></i> <span>Listas</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
           <li><a [routerLink]="'materiais'"><i class="fa fa-circle-o"></i> Materiais</a></li>
-          <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
         </ul>
       </li>
-      <li>
+      <!-- <li>
         <a href="pages/calendar.html">
           <i class="fa fa-calendar"></i> <span>Calendar</span>
           <span class="pull-right-container">
@@ -177,7 +176,7 @@
           <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
         </ul>
       </li>
-      <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+      <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
      
     </ul>
   </section>
