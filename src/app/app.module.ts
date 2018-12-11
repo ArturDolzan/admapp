@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 
@@ -32,6 +32,8 @@ import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component
 import { NotificationService } from './shared/messages/notification.service';
 import { RadioComponent } from './shared/radio/radio.component';
 import { LinkAtivoInativoComponent } from './shared/link-ativo-inativo/link-ativo-inativo.component';
+
+//export let InjectorInstance: Injector
 
 @NgModule({
   declarations: [
@@ -81,4 +83,10 @@ import { LinkAtivoInativoComponent } from './shared/link-ativo-inativo/link-ativ
   providers: [NotificationService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+
+export class AppModule {
+  // constructor(private injector: Injector) 
+  // {
+  //   InjectorInstance = this.injector;
+  // }
+}

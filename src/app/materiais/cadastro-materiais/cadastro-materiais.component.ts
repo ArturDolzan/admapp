@@ -64,6 +64,8 @@ export class CadastroMateriaisComponent implements OnInit {
           this.notificationService.notify(response.Mensagem)
 
           this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: true, isRemoved: false})
+        }, error => {
+          this.notificationService.notify(JSON.parse(error._body).Mensagem)
         })
   }
 
@@ -75,6 +77,8 @@ export class CadastroMateriaisComponent implements OnInit {
       this.notificationService.notify(response.Mensagem)
 
       this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: false, isRemoved: true})
+    }, error => {
+      this.notificationService.notify(JSON.parse(error._body).Mensagem)
     })    
   }
 

@@ -19,4 +19,12 @@ export class AppHeaders implements IAppHeaders {
         // @ts-ignore
         return Cookies.get('AppUser') == null ? 'AppNoAuth' : Cookies.get('AppUser')
     }
+
+    removerCookies(){
+        // @ts-ignore
+        Cookies.set('AppToken', '')
+
+        // @ts-ignore
+        Cookies.set('AppUser', '')
+    }
 }

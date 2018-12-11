@@ -31,7 +31,7 @@ export class MateriaisService extends AppHeaders {
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Listar`, body, options)
-            .pipe(map(response => response.json().Content), catchError(ErrorHandler.handleError))
+            .pipe(map(response => response.json().Content))            
   }
 
   save(data: Materiais): Observable<any>{
@@ -42,7 +42,7 @@ export class MateriaisService extends AppHeaders {
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Salvar`, body, options)
-      .pipe(map(response => response.json()), catchError(ErrorHandler.handleError))
+      .pipe(map(response => response.json()))
   }
 
   remove(data: Materiais): Observable<any>{
@@ -53,7 +53,7 @@ export class MateriaisService extends AppHeaders {
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Remover`, body, options)
-      .pipe(map(response => response.json()), catchError(ErrorHandler.handleError))
+      .pipe(map(response => response.json()))
   }
 
 }

@@ -18,4 +18,9 @@ export class UserLoginComponent implements OnInit {
     this.userLogin = this.servUserLogin.recuperarUsuario()
   }
 
+  onClickSair() {
+    this.servUserLogin.removerCookies()
+    this.servUserLogin.redirecionarUrlLogin()
+  }
+
 }

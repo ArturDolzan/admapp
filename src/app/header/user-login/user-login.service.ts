@@ -40,11 +40,14 @@ export class ServUserLogin extends AppHeaders {
         this.autenticado().subscribe(resposta => {
            userLogin.Nome = this.getUsuario()
         }, error => {
-            this.document.location.href = URL_LOGIN
+            this.redirecionarUrlLogin()
         })
 
         return userLogin
+    }
 
+    redirecionarUrlLogin() {
+        this.document.location.href = URL_LOGIN
     }
 
 }

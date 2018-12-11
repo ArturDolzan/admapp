@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { CadastroMateriaisComponent } from './cadastro-materiais/cadastro-materiais.component';
 import { map, filter, scan, tap, merge, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { fromEvent, pipe } from 'rxjs';
+import { NotificationService } from '../shared/messages/notification.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<Materiais>(false, null)
 
   constructor(private materiaisService: MateriaisService, 
-              private dialog: MatDialog) { 
+              private dialog: MatDialog,
+              private notificationService: NotificationService) { 
 
   }
 
@@ -74,7 +76,11 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
     let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
-    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex).subscribe( conteudo=> this.cbList(conteudo))
+    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex)
+        .subscribe( conteudo=> this.cbList(conteudo), error => {
+          this.loading = false
+          this.notificationService.notify(JSON.parse(error._body).Mensagem)
+        })
   }
 
   cbList(data){

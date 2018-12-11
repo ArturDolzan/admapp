@@ -1,18 +1,25 @@
 import {Response} from '@angular/http'
-import {Observable} from 'rxjs';
+import {throwError} from 'rxjs';
+
 
 export class ErrorHandler {
-    static handleError(error: Response | any){
+
+     static handleError(error: Response | any){
         let errorMessage: string
 
-        //if(error instanceof Response){
+        if(error instanceof Response){
+            // @ts-ignore
             errorMessage = `Erro ${error.status} ao acessar a URL ${error.url} - ${error.statusText} - ${JSON.parse(error._body).Mensagem}`
-     //   }else{
-      //      errorMessage = error.toString()
-      //  }
+        }else{
+            errorMessage = error.toString()
+        }
+
+        //const notificationService =  InjectorInstance.get<NotificationService>(NotificationService)
+
+        //notificationService.notify(errorMessage)
 
         console.log(errorMessage)
 
-        return Observable.throw(errorMessage)
+        return throwError(errorMessage)
     }
 }
