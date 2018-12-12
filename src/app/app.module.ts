@@ -19,19 +19,12 @@ import { RouterModule } from '@angular/router';
 import {ROUTES} from './app-routing.module';
 import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
-import { MatTableModule, MatSortModule, MatPaginator, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogContent, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { MateriaisComponent } from './materiais/materiais.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroMateriaisComponent } from './materiais/cadastro-materiais/cadastro-materiais.component';
-import { InputComponent } from './shared/input/input.component';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
-import { NotificationService } from './shared/messages/notification.service';
-import { RadioComponent } from './shared/radio/radio.component';
-import { LinkAtivoInativoComponent } from './shared/link-ativo-inativo/link-ativo-inativo.component';
+import { SharedModule } from './shared/shared.module';
 
 //export let InjectorInstance: Injector
 
@@ -52,35 +45,21 @@ import { LinkAtivoInativoComponent } from './shared/link-ativo-inativo/link-ativ
     AboutComponent,
     MenuSearchComponent,
     MateriaisComponent,
-    CadastroMateriaisComponent,
-    InputComponent,
-    SnackbarComponent,
-    RadioComponent,
-    LinkAtivoInativoComponent
+    CadastroMateriaisComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
-    MatTableModule,
     BrowserAnimationsModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
     HttpClientModule,
     HttpModule,
-    CommonModule, 
-    FormsModule, 
-    ReactiveFormsModule,
+    SharedModule.forRoot(),
     AgGridModule.withComponents(null)
   ],
   entryComponents:[
     CadastroMateriaisComponent
   ],
-  providers: [NotificationService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 
