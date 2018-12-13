@@ -74,7 +74,7 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
                 distinctUntilChanged(),
                 tap(data => {
                     
-                    console.log('Implementar filtro...')
+                    this.list()
                 })
             )
             .subscribe();
@@ -96,7 +96,8 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
     let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
-    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex)
+
+    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex, this.input.nativeElement.value)
         .subscribe( conteudo=> this.cbList(conteudo), error => {
           this.loading = false
           this.notificationService.notify(JSON.parse(error._body).Mensagem)

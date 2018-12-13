@@ -6,6 +6,7 @@ import { MateriaisService } from '../materiais.service';
 import { NotificationService } from '../../shared/messages/notification.service';
 import { RadioOption } from 'src/app/shared/radio/radio-option.model';
 import { markDirtyIfOnPush } from '@angular/core/src/render3/instructions';
+import { pairwise, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastro-materiais',
@@ -24,7 +25,6 @@ export class CadastroMateriaisComponent implements OnInit {
     {label: 'Ativo', value: 1},
     {label: 'Desativado', value: 0}
   ]
-
 
   decimalPattern = /^[1-9]\d*(\.\d+)?$/
   numberPattern = /^[0-9]*$/
@@ -50,6 +50,38 @@ export class CadastroMateriaisComponent implements OnInit {
       Observacao: this.formBuilder.control(this.data.Observacao)
     })
 
+    /*this.cadForm.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      pairwise(),
+      map(([oldState, newState]) => {
+          let changes = {};
+          for (const key in newState) {
+            if (oldState[key] !== newState[key] && 
+                oldState[key] !== undefined) {
+              changes[key] = newState[key];
+            }
+          }
+          return changes;
+        }),
+        filter(changes => Object.keys(changes).length !== 0 )
+      ).subscribe(
+        value => {
+          console.log("Form has changed:", value);
+        }
+      );*/
+
+      this.cadForm.controls['Descricao'].valueChanges.pipe(
+        debounceTime(200),
+        distinctUntilChanged()
+      ).subscribe( data => {
+        console.log('Descricao alterada: ' + data)
+      })
+    
+  }
+
+  change(event){
+    debugger
   }
 
   isNew(): boolean{

@@ -19,7 +19,11 @@ export class MateriaisService extends AppHeaders {
     super()
    }
 
-  materiais(start: number, limit: number, page: number): Observable<any[]>{
+  materiais(start: number, limit: number, page: number, filter: string): Observable<any[]>{
+    
+    if(filter){
+      return this.filtrarMateriais(start, limit, page, filter)
+    }
 
     let body = JSON.stringify({
       Start: start,
@@ -31,6 +35,22 @@ export class MateriaisService extends AppHeaders {
     let options      = new RequestOptions({ headers: headers }); 
 
     return this.http.post(`${URL_API}/Materiais/Listar`, body, options)
+            .pipe(map(response => response.json().Content))            
+  }
+
+  filtrarMateriais(start: number, limit: number, page: number, filter: string): Observable<any[]>{
+
+    let body = JSON.stringify({
+      Start: start,
+      Limit: limit,
+      Page: page,
+      Filter: filter
+    })
+
+    let headers      = this.getHeaders();
+    let options      = new RequestOptions({ headers: headers }); 
+
+    return this.http.post(`${URL_API}/Materiais/Filtrar`, body, options)
             .pipe(map(response => response.json().Content))            
   }
 
