@@ -7,14 +7,30 @@ import { CadastroMateriaisComponent } from './cadastro-materiais/cadastro-materi
 import { map, filter, scan, tap, merge, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { fromEvent, pipe } from 'rxjs';
 import { NotificationService } from '../shared/messages/notification.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'app-materiais',
   templateUrl: './materiais.component.html',
+  animations: [
+    trigger('toggleSearch', [
+      state('hidden', style({
+        opacity: 0,
+        "max-height": "0px"
+      })),
+      state('visible', style({
+        opacity: 1,
+        "max-height": "70px"
+      })),
+      transition('* => *', animate('250ms 0s ease-in-out'))
+    ])
+  ],
   styleUrls: ['./materiais.component.css']
 })
 export class MateriaisComponent implements OnInit, AfterViewInit {
+
+  searchBarState = 'hidden'
 
   materiais: Materiais[]
   enumMateriaisAtivo = EnumMateriaisAtivo
@@ -37,6 +53,10 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
 
   }
 
+  toggleSearch(){
+    this.searchBarState = this.searchBarState === 'hidden' ? 'visible' : 'hidden'
+  }
+
   enumAtivo(value){
     return this.enumMateriaisAtivo[value]
   }
@@ -50,17 +70,17 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
 
     fromEvent(this.input.nativeElement,'keyup')
             .pipe(
-                debounceTime(150),
+                debounceTime(400),
                 distinctUntilChanged(),
                 tap(data => {
                     
-                    alert('Implementar...')
+                    console.log('Implementar filtro...')
                 })
             )
             .subscribe();
 
     this.sort.sortChange.subscribe(data => {
-      alert('Implementar...')
+      console.log('Implementar...')
     });
 
     this.paginator.page.pipe( tap(data => { 

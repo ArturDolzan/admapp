@@ -53,3 +53,17 @@ mat-header-cell:nth-child(6) {
   width: 100%;
   height: 100%;
 }
+
+.search-link {
+  cursor: pointer;
+  color: #555;
+}
+
+.search-link:hover {
+color: #9DDEF5;
+}
+
+.search-bar {
+  opacity: 0;
+  max-height: 0px;
+}

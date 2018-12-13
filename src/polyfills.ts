@@ -74,6 +74,11 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+//import 'web-animations-js/web-animations.min.js'
+
+//import 'intl'
+//import 'intl/locale-data/jsonp/pt-BR.js'
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
