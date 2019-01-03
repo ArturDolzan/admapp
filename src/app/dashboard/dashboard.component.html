@@ -19,15 +19,13 @@
     </div>
 
     <div class="col-sm-4 col-xs-12">
-      <a href="#">
+      <a [routerLink]="'configuracoes'">
         <div class="place-info-box">
-          <span class="place-info-box-icon"><img src="assets/pedidos.jpg" /></span>
+          <span class="place-info-box-icon"><img src="assets/configuracoes.png" /></span>
       
           <div class="place-info-box-content">
-            <span class="place-info-box-text">Pedidos</span>
-            
-            <span class="place-info-box-detail">Categoria</span>
-            <span class="place-info-box-detail">Detalhe</span>
+            <span class="place-info-box-text">Configurações</span>
+            <span class="place-info-box-detail"><a [routerLink]="'usuarios'" class=""><i class="fa fa-user"></i> Usuários </a></span>
           </div>
           <!-- /.info-box-content -->
         </div>

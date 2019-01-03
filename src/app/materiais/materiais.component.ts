@@ -97,7 +97,7 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
 
     this.loading = true
 
-    this.materiaisService.materiais(pageindex, this.paginator.pageSize, pageindex, this.input.nativeElement.value)
+    this.materiaisService.list(pageindex, this.paginator.pageSize, pageindex, this.input.nativeElement.value)
         .subscribe( conteudo=> this.cbList(conteudo), error => {
           this.loading = false
           this.notificationService.notify(JSON.parse(error._body).Mensagem)

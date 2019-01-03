@@ -1,16 +1,18 @@
+import { CrudService } from '../../../shared/services/crudService.service';
 import { Injectable } from '@angular/core';
-import { CrudService } from '../shared/services/crudService.service';
 import { Http } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MateriaisService extends CrudService {
+export class UsuariosService extends CrudService {
 
   constructor(public http: Http) {
     super(http)
 
-    this.controllerName = 'Materiais'
+    this.controllerName = 'Usuarios'
+
    }
 
-  }
+   
+}

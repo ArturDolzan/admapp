@@ -25,6 +25,9 @@ import { MateriaisComponent } from './materiais/materiais.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroMateriaisComponent } from './materiais/cadastro-materiais/cadastro-materiais.component';
 import { SharedModule } from './shared/shared.module';
+import { ConfiguracoesComponent } from './settings/configuracoes/configuracoes.component';
+import { UsuariosComponent } from './settings/configuracoes/usuarios/usuarios.component';
+import { CadastroUsuariosComponent } from './settings/configuracoes/usuarios/cadastro-usuarios/cadastro-usuarios.component';
 
 //export let InjectorInstance: Injector
 
@@ -45,7 +48,10 @@ import { SharedModule } from './shared/shared.module';
     AboutComponent,
     MenuSearchComponent,
     MateriaisComponent,
-    CadastroMateriaisComponent
+    CadastroMateriaisComponent,
+    ConfiguracoesComponent,
+    UsuariosComponent,
+    CadastroUsuariosComponent
   ],
   imports: [
     BrowserModule,
