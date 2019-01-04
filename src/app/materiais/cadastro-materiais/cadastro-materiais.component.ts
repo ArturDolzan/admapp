@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Materiais } from '../materiais.model';
+import { Materiais, EnumMateriaisAtivo } from '../materiais.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MateriaisService } from '../materiais.service';
 import { NotificationService } from '../../shared/messages/notification.service';
-import { RadioOption } from 'src/app/shared/radio/radio-option.model';
 import { markDirtyIfOnPush } from '@angular/core/src/render3/instructions';
 import { pairwise, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { CadastroCrud } from '../../shared/cadastro-crud/cadastroCrud';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RadioOption } from '../../shared/radio/radio-option.model';
 
 @Component({
   selector: 'app-cadastro-materiais',
@@ -15,106 +16,86 @@ import { pairwise, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/
 })
 
 
-export class CadastroMateriaisComponent implements OnInit {
-
-  cadForm: FormGroup
-
-  @Input() data:  Materiais
-
-  opcoesAtivo: RadioOption[] = [
-    {label: 'Ativo', value: 1},
-    {label: 'Desativado', value: 0}
-  ]
+export class CadastroMateriaisComponent extends CadastroCrud implements OnInit {
 
   decimalPattern = /^[1-9]\d*(\.\d+)?$/
   numberPattern = /^[0-9]*$/
 
-  constructor(private formBuilder: FormBuilder, 
-              private dialogRef: MatDialogRef<CadastroMateriaisComponent>,
-              private materiaisService: MateriaisService,
-              private notificationService: NotificationService,
-              @Inject(MAT_DIALOG_DATA) data) { 
+  constructor(private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private materiaisService: MateriaisService,
+    private notificationService: NotificationService,
+    public router: Router) {
+      super(router)
 
-                 this.data = data;
+      this.rotaNavegacaoLista = "../../materiais"
+     }
 
-              }
+
+    cadForm: FormGroup              
+    materiais: Materiais = new Materiais()  
+
+    opcoesAtivo: RadioOption[] = [
+      {label: 'Ativo', value: 1},
+      {label: 'Desativado', value: 0}
+    ]
 
   ngOnInit() {
 
+    this.materiais.Id = parseInt(this.route.snapshot.params['Id'])
+
     this.cadForm = this.formBuilder.group({
-      Id: this.formBuilder.control({value: this.data.Id, disabled: true}, [Validators.required]),
-      Ativo: this.formBuilder.control(this.data.Ativo, [Validators.required]),
-      Descricao: this.formBuilder.control(this.data.Descricao, [Validators.required]),
-      Quantidade: this.formBuilder.control(this.data.Quantidade, [Validators.required, Validators.pattern(this.numberPattern)]),
-      ValorUnitario: this.formBuilder.control(this.data.ValorUnitario, [Validators.required, Validators.pattern(this.decimalPattern)]),
-      Observacao: this.formBuilder.control(this.data.Observacao)
+      Id: this.formBuilder.control({value: this.materiais.Id, disabled: true}, [Validators.required]),
+      Ativo: this.formBuilder.control(EnumMateriaisAtivo.Sim, [Validators.required]),
+      Descricao: this.formBuilder.control('', [Validators.required]),
+      Quantidade: this.formBuilder.control(0, [Validators.required, Validators.pattern(this.numberPattern)]),
+      ValorUnitario: this.formBuilder.control(0, [Validators.required, Validators.pattern(this.decimalPattern)]),
+      Observacao: this.formBuilder.control('')
     })
 
-    /*this.cadForm.valueChanges.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      pairwise(),
-      map(([oldState, newState]) => {
-          let changes = {};
-          for (const key in newState) {
-            if (oldState[key] !== newState[key] && 
-                oldState[key] !== undefined) {
-              changes[key] = newState[key];
-            }
-          }
-          return changes;
-        }),
-        filter(changes => Object.keys(changes).length !== 0 )
-      ).subscribe(
-        value => {
-          console.log("Form has changed:", value);
-        }
-      );*/
+    if(this.materiais.Id){      
+      this.materiaisService.recuperarPorId(this.materiais.Id)
+        .subscribe( conteudo=> this.recuperarPorId(conteudo), error => {
+          this.notificationService.notify(JSON.parse(error._body).Mensagem)
+        })
+    }
 
-      this.cadForm.controls['Descricao'].valueChanges.pipe(
-        debounceTime(200),
-        distinctUntilChanged()
-      ).subscribe( data => {
-        console.log('Descricao alterada: ' + data)
-      })
-    
   }
 
-  change(event){
-    debugger
+  recuperarPorId(content: any){
+
+    this.cadForm.setValue({
+      Id: content.Content.Dados.Id, 
+      Ativo: content.Content.Dados.Ativo,
+      Descricao: content.Content.Dados.Descricao,
+      Quantidade: content.Content.Dados.Quantidade,
+      ValorUnitario: content.Content.Dados.ValorUnitario,
+      Observacao: content.Content.Dados.Observacao
+    });
+
   }
+
 
   isNew(): boolean{
-    return this.data.Id === 0 ? true: false
+    return this.materiais.Id === 0 ? true: false
   }
 
-  save() {
+  save() {    
 
-    this.materiaisService.save(this.cadForm.getRawValue())
+    var dto = this.cadForm.getRawValue()
+
+    if(this.isNew()){
+      dto.Ativo = EnumMateriaisAtivo.Sim
+    }    
+
+    this.materiaisService.save(dto)
         .subscribe(response => {
           
           this.notificationService.notify(response.Mensagem)
 
-          this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: true, isRemoved: false})
+          this.navegarParaLista()
         }, error => {
           this.notificationService.notify(JSON.parse(error._body).Mensagem)
         })
-  }
-
-  remove() {
-    
-    this.materiaisService.remove(this.cadForm.getRawValue())
-    .subscribe(response => {
-      
-      this.notificationService.notify(response.Mensagem)
-
-      this.dialogRef.close({data: this.cadForm.getRawValue(), isSaved: false, isRemoved: true})
-    }, error => {
-      this.notificationService.notify(JSON.parse(error._body).Mensagem)
-    })    
-  }
-
-  close() {
-      this.dialogRef.close({isSaved: false, isRemoved: false});
-  }  
+  } 
 }

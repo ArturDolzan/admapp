@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { MatDialogConfig, MatDialog, MatPaginator, MatSort} from '@angular/material';
+import { MatPaginator, MatSort} from '@angular/material';
 import { Materiais, EnumMateriaisAtivo } from './materiais.model';
 import { MateriaisService } from './materiais.service';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -8,6 +8,7 @@ import { map, filter, scan, tap, merge, distinctUntilChanged, debounceTime } fro
 import { fromEvent, pipe } from 'rxjs';
 import { NotificationService } from '../shared/messages/notification.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -48,8 +49,8 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<Materiais>(false, null)
 
   constructor(private materiaisService: MateriaisService, 
-              private dialog: MatDialog,
-              private notificationService: NotificationService) { 
+              private notificationService: NotificationService,
+              private router: Router) { 
 
   }
 
@@ -121,56 +122,15 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
   }  
 
   onDblClicked(row) {
-    this.openDialog(row)
+    this.router.navigate(['/cadastro-materiais', row.Id])
   }
 
   onNewClick() {
-    let mat = new Materiais()
-    mat.Id = 0
-    mat.Ativo = this.enumMateriaisAtivo.Sim
-    this.openDialog(mat)
+    this.router.navigate(['/cadastro-materiais', 0])
   }
 
   onEditClicked(row) {
-    this.openDialog(row)
-  }
-
-  openDialog(data: Materiais) {
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = false
-    dialogConfig.autoFocus = true
-    dialogConfig.width = "600px"
-
-    dialogConfig.data = data
-
-    const dialogRef = this.dialog.open(CadastroMateriaisComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(      
-        data => {          
-          if(data){
-            if(data.isSaved){
-              this.savedDialog(data)
-            }
-            if(data.isRemoved){
-              this.removedDialog(data)
-            }
-          }
-        }
-    );
-  }
-
-  savedDialog(data: Materiais) {    
-    if(data){
-      this.list()
-    }
-  }
-
-  removedDialog(data: Materiais) {    
-    if(data){
-      this.list()
-    }
+    this.router.navigate(['/cadastro-materiais', row.Id])
   }
 
 }

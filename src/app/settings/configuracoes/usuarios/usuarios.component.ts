@@ -3,7 +3,7 @@ import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Usuarios, EnumTipoUsuariosAdm } from './usuarios.model';
-import { MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UsuariosService } from './usuarios.service';
 import { NotificationService } from '../../../shared/messages/notification.service';
@@ -47,7 +47,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<Usuarios>(false, null)
 
   constructor(private usuariosService: UsuariosService, 
-              private dialog: MatDialog,
               private notificationService: NotificationService,
               private router: Router) { 
 

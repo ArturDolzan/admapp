@@ -1,18 +1,30 @@
-<h2 mat-dialog-title>Material</h2>
-<mat-dialog-content class="mat-typography">
+<section class="content-header">
+</section>
+
+<section class="content">
+  <section class="invoice">
 
 
      <form [formGroup]="cadForm" novalidate>
       
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="page-header">
+            <i class="fa fa-gavel"></i> Cadastro de Material
+          </h2>
+        </div>
+      </div>
+
         <div class="row">
         
-          <div class="col-xs-6">
+          <div class="col-sm-2">
             <app-input-container label="Código">
               <input class="form-control" formControlName="Id" placeholder="Código" autocomplete="off">
             </app-input-container>
           </div>
 
-          <div class="col-xs-6">
+
+          <div class="col-sm-4">
 
               <app-input-container errorMessage="Campo obrigatório">
                  <!-- <app-radio [options]="opcoesAtivo" formControlName="Ativo"></app-radio> -->
@@ -21,52 +33,57 @@
               </app-input-container>
 
           </div>
+        </div>
 
-            <br/>
-          <div class="col-xs-12">
+        <div class="row">
+          <div class="col-sm-4">
               
               <app-input-container label="Descrição" errorMessage="Campo obrigatório" isNew="isNew()">
                 <input class="form-control" formControlName="Descricao" placeholder="Descrição" autocomplete="off" >
               </app-input-container>
           </div>
+        </div>
 
-          <div class="col-xs-12">
+          <div class="row">
+            <div class="col-sm-4">
               <app-input-container label="Quantidade" errorMessage="Campo obrigatório e somente números" isNew="isNew()">
                 <input type="number" class="form-control" formControlName="Quantidade" placeholder="Quantidade" autocomplete="off" >
               </app-input-container>
             </div>
+          </div>
   
-            <div class="col-xs-12">
+          <div class="row">
+            <div class="col-sm-4">
                 <app-input-container label="Valor Unitário" errorMessage="Campo obrigatório e somente números" isNew="isNew()">
                   <input type="number" class="form-control" formControlName="ValorUnitario" placeholder="Valor Unitário" autocomplete="off" >
                 </app-input-container>
             </div>
+          </div>
 
-            <div class="col-xs-12">
+          <div class="row">
+            <div class="col-sm-4">
               <app-input-container label="Observação" isNew="isNew()">
                   <textarea  class="form-control" formControlName="Observacao" placeholder="Observação" autocomplete="off"></textarea>
               </app-input-container>
             </div>
+          </div>
 
-        </div>
-
+        
       </form> 
 
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    
-      <button  class="btn btn-danger btn-space" (click)="remove()" [disabled]="isNew()">
-          <i class="fa fa-trash"></i> Remover
-      </button>
+      <div class="row">
+        <div class="col-sm-4">
 
-      <span class="spacer"></span>
+          <button class="btn btn-primary" (click)="navegarParaLista()">
+              <i class="fa fa-arrow-left"></i> Cancelar
+          </button>
 
-      <button  class="btn btn-primary btn-space" (click)="save()" [disabled]="!cadForm.valid">
-          <i class="fa fa-save"></i> Salvar
-      </button>
+          <button class="btn btn-success pull-right" (click)="save()" 
+            [disabled]="!cadForm.valid">
+              <i class="fa fa-save"></i> Salvar
+          </button>
+        </div>
+      </div>
 
-      <button  class="btn btn-primary pull-right" (click)="close()">
-          <i class="fa fa-window-close"></i> Fechar
-      </button>
-
-</mat-dialog-actions>
+    </section>
+  </section>
