@@ -28,8 +28,7 @@ import { SharedModule } from './shared/shared.module';
 import { ConfiguracoesComponent } from './settings/configuracoes/configuracoes.component';
 import { UsuariosComponent } from './settings/configuracoes/usuarios/usuarios.component';
 import { CadastroUsuariosComponent } from './settings/configuracoes/usuarios/cadastro-usuarios/cadastro-usuarios.component';
-
-//export let InjectorInstance: Injector
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,7 @@ import { CadastroUsuariosComponent } from './settings/configuracoes/usuarios/cad
   entryComponents:[
     CadastroMateriaisComponent
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 
