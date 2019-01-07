@@ -8,9 +8,10 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NotificationService } from './messages/notification.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { ConfirmacaoComponent } from './messages/confirmacao/confirmacao.component';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent],
+  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,7 +27,8 @@ import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, 
   ],
   exports: [
     InputComponent, 
-    SnackbarComponent, 
+    SnackbarComponent,
+    ConfirmacaoComponent, 
     RadioComponent, 
     LinkAtivoInativoComponent, 
     CommonModule,

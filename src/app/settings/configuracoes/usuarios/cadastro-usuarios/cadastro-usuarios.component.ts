@@ -5,6 +5,7 @@ import { UsuariosService } from '../usuarios.service';
 import { NotificationService } from '../../../../shared/messages/notification.service';
 import { Usuarios, EnumTipoUsuariosAdm } from '../usuarios.model';
 import { CadastroCrud } from '../../../../shared/cadastro-crud/cadastroCrud';
+import { ConfirmacaoService, EnumTipoConfirmacao } from '../../../../shared/messages/confirmacao/confirmacao.service';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -17,6 +18,7 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
               private formBuilder: FormBuilder,
               private usuariosService: UsuariosService,
               private notificationService: NotificationService,
+              private confirmacaoService: ConfirmacaoService,
               public router: Router) {
                 super(router)
 
@@ -92,6 +94,27 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
         }, error => {
           this.notificationService.notify(JSON.parse(error._body).Mensagem)
         })
+  }
+
+  remove() {
+
+    let me = this
+
+    this.confirmacaoService.confirm("Deseja realmente remover?", "Pergunta", EnumTipoConfirmacao.Pergunta ,function(){
+      
+      me.usuariosService.remove(me.cadForm.getRawValue())
+        .subscribe(response => {
+          
+          me.notificationService.notify(response.Mensagem)
+
+          me.navegarParaLista()
+        }, error => {
+          me.notificationService.notify(JSON.parse(error._body).Mensagem)
+        })
+    },function(){
+      
+    })
+
   }
 
 

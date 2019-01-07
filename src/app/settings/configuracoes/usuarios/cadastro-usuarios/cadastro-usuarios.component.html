@@ -67,6 +67,11 @@
               <i class="fa fa-arrow-left"></i> Cancelar
           </button>
 
+          <button class="btn btn-link" (click)="remove()" 
+            [disabled]="isNew()">
+              <i class="fa fa-trash"></i>
+          </button>
+
           <button class="btn btn-success pull-right" (click)="save()" 
             [disabled]="!cadForm.valid">
               <i class="fa fa-save"></i> Salvar

@@ -8,6 +8,7 @@ import { pairwise, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/
 import { CadastroCrud } from '../../shared/cadastro-crud/cadastroCrud';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RadioOption } from '../../shared/radio/radio-option.model';
+import { ConfirmacaoService, EnumTipoConfirmacao } from '../../shared/messages/confirmacao/confirmacao.service';
 
 @Component({
   selector: 'app-cadastro-materiais',
@@ -25,6 +26,7 @@ export class CadastroMateriaisComponent extends CadastroCrud implements OnInit {
     private formBuilder: FormBuilder,
     private materiaisService: MateriaisService,
     private notificationService: NotificationService,
+    private confirmacaoService: ConfirmacaoService,
     public router: Router) {
       super(router)
 
@@ -48,8 +50,8 @@ export class CadastroMateriaisComponent extends CadastroCrud implements OnInit {
       Id: this.formBuilder.control({value: this.materiais.Id, disabled: true}, [Validators.required]),
       Ativo: this.formBuilder.control(EnumMateriaisAtivo.Sim, [Validators.required]),
       Descricao: this.formBuilder.control('', [Validators.required]),
-      Quantidade: this.formBuilder.control(0, [Validators.required, Validators.pattern(this.numberPattern)]),
-      ValorUnitario: this.formBuilder.control(0, [Validators.required, Validators.pattern(this.decimalPattern)]),
+      Quantidade: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
+      ValorUnitario: this.formBuilder.control('', [Validators.required, Validators.pattern(this.decimalPattern)]),
       Observacao: this.formBuilder.control('')
     })
 
@@ -97,5 +99,24 @@ export class CadastroMateriaisComponent extends CadastroCrud implements OnInit {
         }, error => {
           this.notificationService.notify(JSON.parse(error._body).Mensagem)
         })
-  } 
+  }
+  
+  remove() {
+    let me = this
+
+    this.confirmacaoService.confirm("Deseja realmente remover?", "Pergunta", EnumTipoConfirmacao.Pergunta ,function(){
+      
+      me.materiaisService.remove(me.cadForm.getRawValue())
+        .subscribe(response => {
+          
+          me.notificationService.notify(response.Mensagem)
+
+          me.navegarParaLista()
+        }, error => {
+          me.notificationService.notify(JSON.parse(error._body).Mensagem)
+        })
+    },function(){
+      
+    })
+  }
 }

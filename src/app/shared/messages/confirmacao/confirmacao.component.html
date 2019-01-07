@@ -1,0 +1,29 @@
+  <div class="modal" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"  id="exampleModalLongTitle"> 
+              <i *ngIf="renderizarIconePergunta()" class="fa fa-question-circle"></i> 
+              <i *ngIf="renderizarIconeAviso()" class="fa fa-exclamation-triangle"></i> 
+              <i *ngIf="renderizarIconeInformacao()" class="fa fa-info-circle"></i> 
+                {{message?.titulo}}
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>          
+            </h3>
+          </div>        
+          <div class="modal-body">
+              
+            {{message?.text}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" *ngIf="exibirBotaoNao()" class="btn btn-secondary" data-dismiss="modal" (click)="message.noFn()">Não</button>
+            <button type="button" *ngIf="exibirBotaoSim()" class="btn btn-primary" data-dismiss="modal" (click)="message.siFn()">Sim</button>
+            <button type="button" *ngIf="exibirBotaoOk()" class="btn btn-primary" data-dismiss="modal" (click)="message.siFn()">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
