@@ -1,0 +1,68 @@
+
+<div class="col-xs-12 col-sm-2">
+  <div class="btn-group with-margin" role="group" >
+      <button (click)="onNewClick()" class="btn btn-primary btn-space"> <i class="fa fa-plus"></i> Novo</button> 
+      <button (click)="onList()" class="btn btn-primary"> <i class="fa fa-search"> </i> Listar</button>                          
+  </div>
+</div>
+
+<a (click)="toggleSearch()" class="search-link pull-right">
+  <span *ngIf="iptSearch.value"><small>"{{iptSearch.value}}"</small></span> <i class="fa fa-search"></i>
+</a>
+
+<div class="row">
+  <div class="col-xs-12 search-bar" [@toggleSearch]="searchBarState">
+    <mat-form-field class="col-xs-12">
+      <input #iptSearch matInput placeholder="Filtrar..." #input>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="spinner-container loading-indicator" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
+
+  <div class="row">
+      <div class="col-xs-12">
+
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="actionsColumn" >
+            <mat-header-cell *matHeaderCellDef >  </mat-header-cell>
+            <mat-cell *matCellDef="let row" >
+                <button class="btn btn-link btn-sm" (click)="onEditClicked(row)" focusable="false" >
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </mat-cell>
+          </ng-container>
+
+        <ng-container matColumnDef="Codigo" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+          <mat-cell *matCellDef="let estados"> {{estados.Id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Nome">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let estados"> {{estados.Nome}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Sigla">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Sigla </mat-header-cell>
+          <mat-cell *matCellDef="let estados"> {{estados.Sigla}} </mat-cell>
+        </ng-container>
+       
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns; " 
+          [ngClass]="{'highlight': selectedRowIndex == row.Id}"
+          (click)="onRowClicked(row)"
+          (dblclick)="onDblClicked(row)">
+        </mat-row>
+
+      </mat-table>
+
+      <mat-paginator [length]="0" [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+
+  </div>
+</div>

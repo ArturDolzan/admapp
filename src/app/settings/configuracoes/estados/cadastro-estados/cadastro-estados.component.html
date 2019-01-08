@@ -1,0 +1,67 @@
+<section class="content-header">
+</section>
+
+<section class="content">
+  <section class="invoice">
+
+     <form [formGroup]="cadForm" novalidate>
+
+        <div class="row">
+            <div class="col-sm-12">
+              <h2 class="page-header">
+                <i class="fa fa-home"></i> Cadastro de Estados
+              </h2>
+            </div>
+          </div>
+
+        <div class="row">
+        
+          <div class="col-sm-2">
+            <app-input-container label="Código">
+              <input class="form-control" formControlName="Id" placeholder="Código" autocomplete="off">
+            </app-input-container>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+              
+              <app-input-container label="Nome" errorMessage="Campo obrigatório" isNew="isNew()">
+                <input class="form-control" formControlName="Nome" placeholder="Nome" autocomplete="off">
+              </app-input-container>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">
+                
+                <app-input-container label="Sigla" errorMessage="Campo obrigatório e máx. 2 caracteres" isNew="isNew()">
+                  <input class="form-control" formControlName="Sigla" placeholder="Sigla" autocomplete="off" oninput="this.value = this.value.toUpperCase()">
+                </app-input-container>
+            </div>
+          </div>
+
+      </form> 
+
+      <div class="row">
+        <div class="col-sm-4">
+
+          <button class="btn btn-primary" (click)="navegarParaLista()">
+              <i class="fa fa-arrow-left"></i> Cancelar
+          </button>
+
+          <button class="btn btn-link" (click)="remove()" 
+            [disabled]="isNew()">
+              <i class="fa fa-trash"></i>
+          </button>
+
+          <button class="btn btn-success pull-right" (click)="save()" 
+            [disabled]="!cadForm.valid">
+              <i class="fa fa-save"></i> Salvar
+          </button>
+        </div>
+      </div>
+
+    </section>
+  </section>

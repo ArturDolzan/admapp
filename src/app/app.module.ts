@@ -29,6 +29,8 @@ import { ConfiguracoesComponent } from './settings/configuracoes/configuracoes.c
 import { UsuariosComponent } from './settings/configuracoes/usuarios/usuarios.component';
 import { CadastroUsuariosComponent } from './settings/configuracoes/usuarios/cadastro-usuarios/cadastro-usuarios.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { EstadosComponent } from './settings/configuracoes/estados/estados.component';
+import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadastro-estados/cadastro-estados.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     CadastroMateriaisComponent,
     ConfiguracoesComponent,
     UsuariosComponent,
-    CadastroUsuariosComponent
+    CadastroUsuariosComponent,
+    EstadosComponent,
+    CadastroEstadosComponent
   ],
   imports: [
     BrowserModule,
