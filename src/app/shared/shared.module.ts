@@ -7,11 +7,13 @@ import { LinkAtivoInativoComponent } from './link-ativo-inativo/link-ativo-inati
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NotificationService } from './messages/notification.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatAutocompleteModule, MatButtonModule } from '@angular/material';
 import { ConfirmacaoComponent } from './messages/confirmacao/confirmacao.component';
+import { AutolistComponent } from './autolist/autolist.component';
+import { ListfilterComponent } from './listfilter/listfilter.component';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent],
+  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,6 +23,8 @@ import { ConfirmacaoComponent } from './messages/confirmacao/confirmacao.compone
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatAutocompleteModule,
+    MatButtonModule,
     MatDialogModule,
     MatIconModule,
     MatProgressSpinnerModule
@@ -39,9 +43,13 @@ import { ConfirmacaoComponent } from './messages/confirmacao/confirmacao.compone
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatAutocompleteModule,
+    MatButtonModule,
     MatDialogModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AutolistComponent,
+    ListfilterComponent
   ]
 })
 export class SharedModule { 

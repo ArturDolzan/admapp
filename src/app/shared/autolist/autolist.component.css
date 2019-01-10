@@ -1,0 +1,14 @@
+.is-loading ::ng-deep .mat-option-text {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .example-form {
+    min-width: 75px;
+    max-width: 550px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }

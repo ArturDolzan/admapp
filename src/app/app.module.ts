@@ -31,6 +31,8 @@ import { CadastroUsuariosComponent } from './settings/configuracoes/usuarios/cad
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { EstadosComponent } from './settings/configuracoes/estados/estados.component';
 import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadastro-estados/cadastro-estados.component';
+import { CidadesComponent } from './settings/configuracoes/cidades/cidades.component';
+import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadastro-cidades/cadastro-cidades.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadas
     UsuariosComponent,
     CadastroUsuariosComponent,
     EstadosComponent,
-    CadastroEstadosComponent
+    CadastroEstadosComponent,
+    CidadesComponent,
+    CadastroCidadesComponent
   ],
   imports: [
     BrowserModule,

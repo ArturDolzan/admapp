@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
       <h1 class="page-header">
-        <i class="fa fa-user"></i> Usuários
+        <i class="fa fa-home"></i> Cidades
       </h1>
     </div>
   </div>
@@ -35,11 +35,35 @@
 
         <ng-container matColumnDef="Codigo" >
           <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
-          <mat-cell *matCellDef="let usuarios"> {{usuarios.Id}} </mat-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Id}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="Nome">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
-          <mat-cell *matCellDef="let usuarios"> {{usuarios.Nome}} </mat-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Nome}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="CodigoIbge">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cod IBGE </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.CodigoIbge}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Estado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Estados.Nome}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Populacao2010">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> População 2010 </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Populacao2010}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DensidadeDemo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Densidade </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.DensidadeDemo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Gentilico">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Gentilico </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Gentilico}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Area">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Área </mat-header-cell>
+          <mat-cell *matCellDef="let cidades"> {{cidades.Area}} </mat-cell>
         </ng-container>
        
 

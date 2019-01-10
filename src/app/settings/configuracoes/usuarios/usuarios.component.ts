@@ -12,20 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css'],
-  animations: [
-    trigger('toggleSearch', [
-      state('hidden', style({
-        opacity: 0,
-        "max-height": "0px"
-      })),
-      state('visible', style({
-        opacity: 1,
-        "max-height": "70px"
-      })),
-      transition('* => *', animate('250ms 0s ease-in-out'))
-    ])
-  ],
+  styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit, AfterViewInit {
 
@@ -39,7 +26,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
-  @ViewChild('input') input: ElementRef
 
   loading: boolean = true
   selectedRowIndex: number = -1
@@ -50,10 +36,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
               private notificationService: NotificationService,
               private router: Router) { 
 
-  }
-
-  toggleSearch(){
-    this.searchBarState = this.searchBarState === 'hidden' ? 'visible' : 'hidden'
   }
 
   enumTipoUsuario(value){
@@ -67,17 +49,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
 
     this.list()
 
-    fromEvent(this.input.nativeElement,'keyup')
-            .pipe(
-                debounceTime(400),
-                distinctUntilChanged(),
-                tap(data => {
-                    
-                    this.list()
-                })
-            )
-            .subscribe();
-
     this.sort.sortChange.subscribe(data => {
       console.log('Implementar...')
     });
@@ -86,17 +57,19 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
       
       this.list()
      })).subscribe()
-}
+  }
 
-  list(): void{
+  filtrarLista(data){
+    this.list(data.nativeElement.value)
+  }
 
-    let filterValue = this.input.nativeElement.value
+  list(filter?: string): void{
     
     let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
 
-    this.usuariosService.list(pageindex, this.paginator.pageSize, pageindex, this.input.nativeElement.value)
+    this.usuariosService.list(pageindex, this.paginator.pageSize, pageindex, filter)
         .subscribe( conteudo=> this.cbList(conteudo), error => {
           this.loading = false
           this.notificationService.notify(JSON.parse(error._body).Mensagem)

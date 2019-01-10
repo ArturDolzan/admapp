@@ -1,26 +1,26 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Estados } from './estados.model';
+import { Cidades } from './cidades.model';
 import { MatPaginator, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { EstadosService } from './estados.service';
+import { CidadesService } from './cidades.service';
 import { NotificationService } from '../../../shared/messages/notification.service';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-estados',
-  templateUrl: './estados.component.html',
-  styleUrls: ['./estados.component.css']
+  selector: 'app-cidades',
+  templateUrl: './cidades.component.html',
+  styleUrls: ['./cidades.component.css']
 })
-export class EstadosComponent implements OnInit, AfterViewInit {
+export class CidadesComponent implements OnInit, AfterViewInit {
 
   searchBarState = 'hidden'
 
-  estados: Estados[]
+  cidades: Cidades[]
 
-  displayedColumns: string[] = ['actionsColumn', 'Codigo', 'Nome', 'Sigla']
+  displayedColumns: string[] = ['actionsColumn', 'Codigo', 'Nome', 'CodigoIbge', 'Estado', 'Populacao2010', 'DensidadeDemo', 'Gentilico', 'Area']
   dataSource
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -29,9 +29,9 @@ export class EstadosComponent implements OnInit, AfterViewInit {
   loading: boolean = true
   selectedRowIndex: number = -1
   selectedRow: any
-  selection = new SelectionModel<Estados>(false, null)
+  selection = new SelectionModel<Cidades>(false, null)
 
-  constructor(private estadosService: EstadosService, 
+  constructor(private cidadesService: CidadesService, 
               private notificationService: NotificationService,
               private router: Router) { 
 
@@ -59,12 +59,12 @@ export class EstadosComponent implements OnInit, AfterViewInit {
   }
 
   list(filter?: string): void{
-
+    
     let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
 
-    this.estadosService.list(pageindex, this.paginator.pageSize, pageindex, filter)
+    this.cidadesService.list(pageindex, this.paginator.pageSize, pageindex, filter, ["Estados"])
         .subscribe( conteudo=> this.cbList(conteudo), error => {
           this.loading = false
           this.notificationService.notify(JSON.parse(error._body).Mensagem)
@@ -88,14 +88,15 @@ export class EstadosComponent implements OnInit, AfterViewInit {
   }  
 
   onDblClicked(row) {
-    this.router.navigate(['/cadastro-estados', row.Id])
+    this.router.navigate(['/cadastro-cidades', row.Id])
   }
 
   onNewClick() {     
-     this.router.navigate(['/cadastro-estados', 0])
+     this.router.navigate(['/cadastro-cidades', 0])
   }
 
   onEditClicked(row) {
-    this.router.navigate(['/cadastro-estados', row.Id])
+    this.router.navigate(['/cadastro-cidades', row.Id])
   }
+
 }

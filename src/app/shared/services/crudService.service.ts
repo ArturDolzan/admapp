@@ -18,16 +18,17 @@ export class CrudService extends AppHeaders {
 
    controllerName: string
 
-  list(start: number, limit: number, page: number, filter: string): Observable<any[]>{
+  list(start: number, limit: number, page: number, filter: string, includes?: string[]): Observable<any[]>{
     
-    if(filter){
-      return this.filter(start, limit, page, filter)
+    if(filter){  
+      return this.filter(start, limit, page, filter, includes)
     }
 
     let body = JSON.stringify({
       Start: start,
       Limit: limit,
-      Page: page
+      Page: page,
+      includes: includes
     })
 
     let headers      = this.getHeaders();
@@ -37,13 +38,14 @@ export class CrudService extends AppHeaders {
             .pipe(map(response => response.json().Content))            
   }
 
-  filter(start: number, limit: number, page: number, filter: string): Observable<any[]>{
+  filter(start: number, limit: number, page: number, filter: string, includes?: string[]): Observable<any[]>{
 
     let body = JSON.stringify({
       Start: start,
       Limit: limit,
       Page: page,
-      Filter: filter
+      Filter: filter,
+      includes: includes
     })
 
     let headers      = this.getHeaders();
@@ -75,8 +77,11 @@ export class CrudService extends AppHeaders {
       .pipe(map(response => response.json()))
   }
 
-  recuperarPorId(id: number): Observable<any>{
-    let body = JSON.stringify({Id: id})
+  recuperarPorId(id: number, includes?: string[]): Observable<any>{
+    let body = JSON.stringify({
+      Id: id,
+      includes: includes
+    })
 
     let headers      = this.getHeaders();
     let options      = new RequestOptions({ headers: headers }); 
