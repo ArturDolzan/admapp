@@ -1,5 +1,4 @@
-//export const URL_API: string = 'http://localhost:55090/api'
-//export const URL_LOGIN: string = 'http://localhost:55090/login.html'
+import { environment } from "../environments/environment";
 
-export const URL_API: string = 'https://tukazure.eastus.cloudapp.azure.com/apiadmapp/api'
-export const URL_LOGIN: string = 'https://tukazure.eastus.cloudapp.azure.com/admapp/login.html'
+export const URL_API: string = environment.URL_API
+export const URL_LOGIN: string = environment.URL_LOGIN

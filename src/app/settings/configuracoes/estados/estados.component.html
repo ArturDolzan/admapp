@@ -6,12 +6,7 @@
     </div>
   </div>
 
-<div class="col-xs-12 col-sm-2">
-  <div class="btn-group with-margin" role="group" >
-      <button (click)="onNewClick()" class="btn btn-primary btn-space"> <i class="fa fa-plus"></i> Novo</button> 
-      <button (click)="onList()" class="btn btn-primary"> <i class="fa fa-search"> </i> Listar</button>                          
-  </div>
-</div>
+<app-botaonovolistar (clickBotaoNovo)="onNewClick()" (clickBotaoListar)="onList()"></app-botaonovolistar>
 
 <app-listfilter (sendDataToParent)="filtrarLista($event)"></app-listfilter>
 

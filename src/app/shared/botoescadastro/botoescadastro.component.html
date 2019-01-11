@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-4">
+
+    <button class="btn btn-primary" (click)="navegarParaLista()">
+        <i class="fa fa-arrow-left"></i> Cancelar
+    </button>
+
+    <button class="btn btn-link" (click)="remove()" 
+      [disabled]="getEhNovo()">
+        <i class="fa fa-trash"></i>
+    </button>
+
+    <button class="btn btn-success pull-right" (click)="save()" 
+      [disabled]="!getEhFormValido()">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+  </div>
+</div>

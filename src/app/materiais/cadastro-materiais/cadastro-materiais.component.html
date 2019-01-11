@@ -69,26 +69,10 @@
           </div>
 
         
-      </form> 
-
-      <div class="row">
-        <div class="col-sm-4">
-
-          <button class="btn btn-primary" (click)="navegarParaLista()">
-              <i class="fa fa-arrow-left"></i> Cancelar
-          </button>
-
-          <button class="btn btn-link" (click)="remove()" 
-            [disabled]="isNew()">
-              <i class="fa fa-trash"></i>
-          </button>
-
-          <button class="btn btn-success pull-right" (click)="save()" 
-            [disabled]="!cadForm.valid">
-              <i class="fa fa-save"></i> Salvar
-          </button>
-        </div>
-      </div>
+      </form>
+      
+      <app-botoescadastro [ehNovo]="isNew()" [ehFormValido]="cadForm.valid" (clickBotaoNavegarLista)="navegarParaLista()"
+      (clickBotaoRemover)="remove()" (clickBotaoSalvar)="save()"></app-botoescadastro>
 
     </section>
   </section>

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  URL_API: 'https://tukazure.eastus.cloudapp.azure.com/apiadmapp/api',
+  URL_LOGIN: 'https://tukazure.eastus.cloudapp.azure.com/admapp/login.html'
 };

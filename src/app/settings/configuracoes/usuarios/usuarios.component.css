@@ -2,8 +2,6 @@
     width: 480px;
   }
   
-  .spacer {flex: 1 1 auto;}
-  
   table {
       width: 100%;
     }
@@ -28,10 +26,6 @@
       background: #9DDEF5;
     }
   
-    .with-margin {
-      margin-bottom: 8px;
-    }
-  
   /* Transparent Overlay */
   .loading-indicator:before {
     content: '';
@@ -41,18 +35,4 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
-  
-  .search-link {
-    cursor: pointer;
-    color: #555;
-  }
-  
-  .search-link:hover {
-  color: #9DDEF5;
-  }
-  
-  .search-bar {
-    opacity: 0;
-    max-height: 0px;
   }

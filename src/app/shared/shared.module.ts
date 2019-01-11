@@ -11,9 +11,11 @@ import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, 
 import { ConfirmacaoComponent } from './messages/confirmacao/confirmacao.component';
 import { AutolistComponent } from './autolist/autolist.component';
 import { ListfilterComponent } from './listfilter/listfilter.component';
+import { BotaonovolistarComponent } from './botaonovolistar/botaonovolistar.component';
+import { BotoescadastroComponent } from './botoescadastro/botoescadastro.component';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent],
+  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -49,7 +51,9 @@ import { ListfilterComponent } from './listfilter/listfilter.component';
     MatIconModule,
     MatProgressSpinnerModule,
     AutolistComponent,
-    ListfilterComponent
+    ListfilterComponent,
+    BotaonovolistarComponent,
+    BotoescadastroComponent
   ]
 })
 export class SharedModule { 
