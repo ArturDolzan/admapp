@@ -13,9 +13,10 @@ import { AutolistComponent } from './autolist/autolist.component';
 import { ListfilterComponent } from './listfilter/listfilter.component';
 import { BotaonovolistarComponent } from './botaonovolistar/botaonovolistar.component';
 import { BotoescadastroComponent } from './botoescadastro/botoescadastro.component';
+import { ChatComponent } from '../mensageria/chat/chat.component';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent],
+  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent, ChatComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -53,7 +54,8 @@ import { BotoescadastroComponent } from './botoescadastro/botoescadastro.compone
     AutolistComponent,
     ListfilterComponent,
     BotaonovolistarComponent,
-    BotoescadastroComponent
+    BotoescadastroComponent,
+    ChatComponent
   ]
 })
 export class SharedModule { 

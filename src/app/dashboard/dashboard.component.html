@@ -2,32 +2,29 @@
 
   <div class="row">
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-sm-6">
       <a [routerLink]="'materiais'">
-        <div class="place-info-box">
-          <span class="place-info-box-icon"><img src="assets/materiais.png" /></span>
-      
-          <div class="place-info-box-content">
+        <div class="info-box ">
+          <!-- Apply any bg-* class to to the icon to color it -->
+          <span class="info-box-icon bg-red"><i class="fa fa-sticky-note"></i></span>
+          <div class="info-box-content">
             <span class="place-info-box-text">Materiais</span>
-            
-            <span class="place-info-box-detail">Categoria</span>
-            <span class="place-info-box-detail">Detalhe</span>
           </div>
           <!-- /.info-box-content -->
         </div>
       </a>
     </div>
+    <!-- /.info-box -->
 
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-sm-6">
       <a [routerLink]="'configuracoes'">
-        <div class="place-info-box">
-          <span class="place-info-box-icon"><img src="assets/configuracoes.png" /></span>
-      
-          <div class="place-info-box-content">
+        
+        <div class="info-box ">
+          <!-- Apply any bg-* class to to the icon to color it -->
+          <span class="info-box-icon bg-green"><i class="fa fa-cogs"></i></span>
+          <div class="info-box-content">
             <span class="place-info-box-text">Configurações</span>
-            <span class="place-info-box-detail"><a [routerLink]="'usuarios'" class=""><i class="fa fa-user"></i> Usuários </a></span>
-            <span class="place-info-box-detail"><a [routerLink]="'estados'" class=""><i class="fa fa-flag"></i> Estados </a></span>
-            <span class="place-info-box-detail"><a [routerLink]="'cidades'" class=""><i class="fa fa-home"></i> Cidades </a></span>
+            
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -35,5 +32,7 @@
     </div>
 
   </div>
+
+  <app-chat></app-chat>
 
 </section>
