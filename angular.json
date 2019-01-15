@@ -39,7 +39,10 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/fastclick/lib/fastclick.js",
               "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
-              "./src/app/scripts/js.cookie.js"
+              "./node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
+              "./src/app/scripts/js.cookie.js",
+              "./src/app/scripts/jquery.signalR-2.4.0.min.js",
+              "./src/app/scripts/RealTime.js"
             ]
           },
           "configurations": {

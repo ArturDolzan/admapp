@@ -44,7 +44,7 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
     return this.enumMateriaisAtivo[value]
   }
 
-  ngOnInit() {       
+  ngOnInit() {     
   }
 
   ngAfterViewInit() {      
@@ -66,7 +66,7 @@ export class MateriaisComponent implements OnInit, AfterViewInit {
   }
 
   list(filter?: string): void{
-    
+  
     let pageindex = this.paginator.pageIndex +1
 
     this.loading = true
