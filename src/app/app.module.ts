@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
+import { SignalRModule } from 'ng2-signalr';
+import { SignalRConfiguration } from 'ng2-signalr';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -33,6 +36,7 @@ import { EstadosComponent } from './settings/configuracoes/estados/estados.compo
 import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadastro-estados/cadastro-estados.component';
 import { CidadesComponent } from './settings/configuracoes/cidades/cidades.component';
 import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadastro-cidades/cadastro-cidades.component';
+import { URL_HUB } from './app.config';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,7 @@ import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadas
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
+    SignalRModule.forRoot(createConfig),
     BrowserAnimationsModule,
     HttpClientModule,
     HttpModule,
@@ -81,4 +86,18 @@ export class AppModule {
   // {
   //   InjectorInstance = this.injector;
   // }
+}
+ // >= v2.0.0
+ export function createConfig(): SignalRConfiguration {
+    const c = new SignalRConfiguration();
+    c.hubName = 'ChatHub'; 
+    c.qs = { user: 'adm' };
+    c.url = `${URL_HUB}/signalr/hubs` //'http://localhost:55090/signalr/hubs';
+    c.logging = true;
+
+    // >= v5.0.0
+    c.executeEventsInZone = true; // optional, default is true
+    c.executeErrorsInZone = false; // optional, default is false
+    c.executeStatusChangeInZone = true; // optional, default is true
+    return c;
 }

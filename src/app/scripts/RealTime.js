@@ -2,7 +2,7 @@
 {    
     var me = this;
 
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         
         hub = $.connection.chatHub;
         //$.connection.hub.url = 'http://localhost:55090/signalr';
@@ -27,6 +27,6 @@
             alert(mensagem);
         };
 
-    });
+    });*/
     
 })();

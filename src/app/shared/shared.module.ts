@@ -14,9 +14,11 @@ import { ListfilterComponent } from './listfilter/listfilter.component';
 import { BotaonovolistarComponent } from './botaonovolistar/botaonovolistar.component';
 import { BotoescadastroComponent } from './botoescadastro/botoescadastro.component';
 import { ChatComponent } from '../mensageria/chat/chat.component';
+import { HubsComponent } from './hubs/hubs.component';
+import { HubsService } from './hubs/hubs.service';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent, ChatComponent],
+  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent, ChatComponent, HubsComponent, HubsComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -55,14 +57,15 @@ import { ChatComponent } from '../mensageria/chat/chat.component';
     ListfilterComponent,
     BotaonovolistarComponent,
     BotoescadastroComponent,
-    ChatComponent
+    ChatComponent,
+    HubsComponent
   ]
 })
 export class SharedModule { 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers:[NotificationService]
+      providers:[NotificationService, HubsService]
     }
   }
 }

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   URL_API: 'http://localhost:55090/api',
+  URL_HUB: 'http://localhost:55090',
   URL_LOGIN: 'http://localhost:55090/login.html'
 };
 
