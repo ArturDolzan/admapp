@@ -24,6 +24,7 @@
 
         hub.client.publicarParaUsuario = function (mensagem) {			
             console.log(mensagem);
+            alert(mensagem);
         };
 
     });
