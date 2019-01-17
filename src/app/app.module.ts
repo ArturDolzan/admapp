@@ -37,6 +37,7 @@ import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadas
 import { CidadesComponent } from './settings/configuracoes/cidades/cidades.component';
 import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadastro-cidades/cadastro-cidades.component';
 import { URL_HUB } from './app.config';
+import { ChatDirectComponent } from './mensageria/chat-direct/chat-direct.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { URL_HUB } from './app.config';
     EstadosComponent,
     CadastroEstadosComponent,
     CidadesComponent,
-    CadastroCidadesComponent
+    CadastroCidadesComponent,
+    ChatDirectComponent
   ],
   imports: [
     BrowserModule,

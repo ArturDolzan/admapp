@@ -1,11 +1,11 @@
-export class Chat {
+export class ChatDirect {
     NomeUsuario: string
     DataHora: Date
     Mensagem: string
     CaminhoFoto: string
 }
 
-export enum EnumTipoChat {
+export enum EnumTipoChatDirect {
     UsuarioLogado = 1,
     OutroUsuario = 2
 }

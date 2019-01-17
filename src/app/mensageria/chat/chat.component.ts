@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chat, EnumTipoChat } from './chat.model';
 import { ChatService } from './chat.service';
+import { NotificationService } from 'src/app/shared/messages/notification.service';
+import { HubsService } from 'src/app/shared/hubs/hubs.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -9,32 +12,35 @@ import { ChatService } from './chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  chatUsuarioLogado: Chat[] = [
-    {
-      IdUsuario: 1,
-      NomeUsuario: 'Tuca',
-      CaminhoFoto: 'assets/user2-160x160.jpg',
-      DataHora: new Date(),
-      Mensagem: 'Que nada =/',
-      TipoChat: EnumTipoChat.UsuarioLogado
-    }
-  ]
+  listaLogados: any[]
 
-  chatOutrosUsuarios: Chat[] = [
-    {
-      IdUsuario: 2,
-      NomeUsuario: 'Jaca',
-      CaminhoFoto: 'assets/user2-160x160.jpg',
-      DataHora: new Date(),
-      Mensagem: 'Ta pronto??',
-      TipoChat: EnumTipoChat.OutroUsuario
-    }
-  ]
-
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService,
+              private notificationService: NotificationService,
+              private hubsService: HubsService) { }
 
   ngOnInit() {
     
+    this.listarLogados()
+
+    this.hubsService.publicarUsuarioConectou.pipe(tap(()=>{
+      this.listarLogados()
+    }) ).subscribe()
+
+    this.hubsService.publicarUsuarioDesconectou.pipe(tap(()=>{
+      this.listarLogados()
+    }) ).subscribe()
+    
+  }
+
+  listarLogados() {
+    this.chatService.RecuperarUsuariosConectadosChat()
+    .subscribe( conteudo=> this.cbListarLogados(conteudo), error => {
+      this.notificationService.notify(JSON.parse(error._body).Mensagem)
+    })
+  }
+
+  cbListarLogados(conteudo: any){
+    this.listaLogados = conteudo.Dados
   }
 
 }

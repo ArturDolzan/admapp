@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-sm-6 col-xs-12">
+  <div class="box box-danger direct-chat direct-chat-danger">
+      <div class="box-header with-border">
+        <h3 class="box-title">Chat</h3>
+        <div class="box-tools pull-right">
+          <span data-toggle="tooltip" title="Nenhuma mensagem nova" class="badge bg-red">0</span>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <!-- In box-tools add this button if you intend to use the contacts pane -->
+          <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+          
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!-- Conversations are loaded here -->
+        <div class="direct-chat-messages">
+          
+          
+          <!-- Mensagenm para a esquerda (outros usuarios) -->
+          <div *ngFor="let chat of chatOutrosUsuarios" class="direct-chat-msg">
+            <div class="direct-chat-info clearfix">
+              <span class="direct-chat-name pull-left">{{chat.NomeUsuario}}</span>
+              <span class="direct-chat-timestamp pull-right">{{chat.DataHora}}</span>
+            </div>
+            <!-- /.direct-chat-info -->
+            <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
+            <!-- /.direct-chat-img -->
+            <div class="direct-chat-text">
+              {{chat.Mensagem}}
+            </div>
+            <!-- /.direct-chat-text -->
+          </div>
+          <!-- /.direct-chat-msg -->
+    
+          <!-- Mensagem para a direita (usuario logado) -->
+          <div *ngFor="let chat of chatUsuarioLogado" class="direct-chat-msg right">
+            <div class="direct-chat-info clearfix">
+              <span class="direct-chat-name pull-right">{{chat.NomeUsuario}}</span>
+              <span class="direct-chat-timestamp pull-left">{{chat.DataHora}}</span>
+            </div>
+            <!-- /.direct-chat-info -->
+            <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
+            <!-- /.direct-chat-img -->
+            <div class="direct-chat-text">
+                {{chat.Mensagem}}
+            </div>
+            <!-- /.direct-chat-text -->
+          </div>
+          <!-- /.direct-chat-msg -->
+        </div>
+        <!--/.direct-chat-messages-->
+    
+        <!-- Contacts are loaded here -->
+        <div class="direct-chat-contacts">
+          <ul class="contacts-list">
+            <li>
+              <a href="#">
+                <img class="contacts-list-img" src="assets/user2-160x160.jpg" alt="Contact Avatar">
+                <div class="contacts-list-info">
+                  <span class="contacts-list-name">
+                    Tuka
+                    <small class="contacts-list-date pull-right">23 Jan</small>
+                    </span>
+                  <span class="contacts-list-msg">vai pra fuma este ano?</span>
+                </div>
+                <!-- /.contacts-list-info -->
+              </a>
+            </li>
+            <!-- End Contact Item -->
+          </ul>
+          <!-- /.contatcts-list -->
+        </div>
+        <!-- /.direct-chat-pane -->
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="input-group">
+          <input type="text" name="message" placeholder="Digite aqui a mensagem =) ..." class="form-control">
+          <span class="input-group-btn">
+                    <button type="button" class="btn btn-danger btn-flat">Enviar</button>
+                    </span>
+        </div>
+      </div>
+      <!-- /.box-footer-->
+    </div>
+  </div>
+</div>
