@@ -4,6 +4,7 @@ import { ChatService } from './chat.service';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { HubsService } from 'src/app/shared/hubs/hubs.service';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -16,7 +17,8 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatService: ChatService,
               private notificationService: NotificationService,
-              private hubsService: HubsService) { }
+              private hubsService: HubsService,
+              private router: Router) { }
 
   ngOnInit() {
     
@@ -41,6 +43,17 @@ export class ChatComponent implements OnInit {
 
   cbListarLogados(conteudo: any){
     this.listaLogados = conteudo.Dados
+  }
+
+  qtdeLogados() {
+    if(this.listaLogados){
+      return this.listaLogados.length
+    }
+    return 0
+  }
+
+  navegarChatDirect(usuario) {
+    this.router.navigate(['/chat-direct', usuario.ConnectionId, usuario.AppUser])
   }
 
 }

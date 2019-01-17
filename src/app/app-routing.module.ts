@@ -10,6 +10,7 @@ import { EstadosComponent } from './settings/configuracoes/estados/estados.compo
 import { CadastroEstadosComponent } from './settings/configuracoes/estados/cadastro-estados/cadastro-estados.component';
 import { CidadesComponent } from './settings/configuracoes/cidades/cidades.component';
 import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadastro-cidades/cadastro-cidades.component';
+import { ChatDirectComponent } from './mensageria/chat-direct/chat-direct.component';
 
 export const ROUTES: Routes = [
   {path: '', component: DashboardComponent},
@@ -22,5 +23,6 @@ export const ROUTES: Routes = [
   {path:'cidades', component: CidadesComponent},
   {path:'cadastro-cidades/:Id', component: CadastroCidadesComponent},
   {path:'materiais', component: MateriaisComponent},
-  {path:'cadastro-materiais/:Id', component: CadastroMateriaisComponent}
+  {path:'cadastro-materiais/:Id', component: CadastroMateriaisComponent},
+  {path:'chat-direct/:ConectionId/:AppUser', component: ChatDirectComponent},
 ]

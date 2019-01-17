@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatDirect } from './chat-direct.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-direct',
@@ -8,7 +9,10 @@ import { ChatDirect } from './chat-direct.model';
 })
 export class ChatDirectComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
+
+  conectionId: string
+  appUser: string
 
   chatUsuarioLogado: ChatDirect[] = [
     {
@@ -29,6 +33,9 @@ export class ChatDirectComponent implements OnInit {
   ]
 
   ngOnInit() {
+    this.conectionId = this.route.snapshot.params['ConectionId']
+    this.appUser = this.route.snapshot.params['AppUser']
+    
   }
 
 }
