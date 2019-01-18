@@ -14,7 +14,7 @@ export class ChatService extends CrudService {
     constructor(public http: Http) {
         super(http)
 
-        this.controllerName = 'Chat'
+        this.controllerName = 'ChatHub'
     }
 
     RecuperarUsuariosConectadosChat(): Observable<any[]>{

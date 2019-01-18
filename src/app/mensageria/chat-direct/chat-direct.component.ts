@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatDirect } from './chat-direct.model';
+import { ChatDirect, EnumChatVisualizado } from './chat-direct.model';
 import { ActivatedRoute } from '@angular/router';
+import { ChatDirectService } from './chat-direct.service';
+import { NotificationService } from '../../shared/messages/notification.service';
 
 @Component({
   selector: 'app-chat-direct',
@@ -9,33 +11,65 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChatDirectComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private chatDirectService: ChatDirectService,
+              private notificationService: NotificationService) { }
 
   conectionId: string
-  appUser: string
+  appUserDestino: string
 
-  chatUsuarioLogado: ChatDirect[] = [
+  chatDirect: ChatDirect[] = [
     {
-      NomeUsuario: 'Tuca',
-      CaminhoFoto: 'assets/user2-160x160.jpg',
+      UsuarioOrigem: 'Jaca',
+      UsuarioDestino: 'AppNoAuth',
       DataHora: new Date(),
-      Mensagem: 'Que nada =/'
-    }
-  ]
-
-  chatOutrosUsuarios: ChatDirect[] = [
+      Mensagem: 'Are you ok?',
+      CaminhoFoto: 'assets/user2-160x160.jpg',
+      Visualizado: EnumChatVisualizado.NaoVisualizado
+    },
     {
-      NomeUsuario: 'Jaca',
-      CaminhoFoto: 'assets/user2-160x160.jpg',
+      UsuarioOrigem: 'AppNoAuth',
+      UsuarioDestino: 'Jaca',
       DataHora: new Date(),
-      Mensagem: 'Ta pronto??'
+      Mensagem: 'Yes',
+      CaminhoFoto: 'assets/user2-160x160.jpg',
+      Visualizado: EnumChatVisualizado.NaoVisualizado
+    },
+    {
+      UsuarioOrigem: 'AppNoAuth',
+      UsuarioDestino: 'Jaca',
+      DataHora: new Date(),
+      Mensagem: 'Muito yessssss',
+      CaminhoFoto: 'assets/user2-160x160.jpg',
+      Visualizado: EnumChatVisualizado.NaoVisualizado
     }
   ]
 
   ngOnInit() {
     this.conectionId = this.route.snapshot.params['ConectionId']
-    this.appUser = this.route.snapshot.params['AppUser']
-    
+    this.appUserDestino = this.route.snapshot.params['AppUser']
+
+    this.recuperarChat()    
+  }
+
+  recuperarChat(){
+    this.chatDirectService.recuperarChat(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
+    .subscribe( conteudo=> this.cbRecuperarChat(conteudo), error => {
+      
+      this.notificationService.notify(JSON.parse(error._body).Mensagem)
+    })
+  }
+
+  cbRecuperarChat(conteudo){
+    this.chatDirect = conteudo.Dados
+  }
+
+  posicionarDireita(chat) {
+    return chat.UsuarioOrigem === this.chatDirectService.recuperarUsuarioLogado()
+  }
+
+  posicionarEsquerda(chat) {
+    return chat.UsuarioDestino === this.appUserDestino
   }
 
 }

@@ -1,11 +1,13 @@
 export class ChatDirect {
-    NomeUsuario: string
-    DataHora: Date
+    UsuarioOrigem: string
+    UsuarioDestino: string
+    DataHora: Date    
     Mensagem: string
+    Visualizado: EnumChatVisualizado
     CaminhoFoto: string
 }
 
-export enum EnumTipoChatDirect {
-    UsuarioLogado = 1,
-    OutroUsuario = 2
+export enum EnumChatVisualizado {
+    Viualizado = 1,
+    NaoVisualizado = 0
 }

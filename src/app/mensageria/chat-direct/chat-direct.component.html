@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6 col-xs-12">
+  <div class="col-md-4 col-xs-12">
   <div class="box box-danger direct-chat direct-chat-danger">
       <div class="box-header with-border">
         <h3 class="box-title">Chat</h3>
@@ -18,10 +18,10 @@
           
           
           <!-- Mensagenm para a esquerda (outros usuarios) -->
-          <div *ngFor="let chat of chatOutrosUsuarios" class="direct-chat-msg">
+          <div *ngFor="let chat of chatDirect" class="direct-chat-msg" [class.right]="posicionarDireita(chat)">
             <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name pull-left">{{chat.NomeUsuario}}</span>
-              <span class="direct-chat-timestamp pull-right">{{chat.DataHora | date: 'dd/MM/yyyy hh:mm'}}</span>
+              <span class="direct-chat-name" [class.pull-left]="posicionarEsquerda(chat)" [class.pull-right]="posicionarDireita(chat)">{{chat.NomeUsuario}}</span>
+              <span class="direct-chat-timestamp" [class.pull-left]="posicionarEsquerda(chat)" [class.pull-right]="posicionarDireita(chat)">{{chat.DataHora | date: 'dd/MM/yyyy hh:mm'}}</span>
             </div>
             <!-- /.direct-chat-info -->
             <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
@@ -34,21 +34,21 @@
           <!-- /.direct-chat-msg -->
     
           <!-- Mensagem para a direita (usuario logado) -->
-          <div *ngFor="let chat of chatUsuarioLogado" class="direct-chat-msg right">
+          <!-- <div *ngFor="let chat of chatUsuarioLogado" class="direct-chat-msg right">
             <div class="direct-chat-info clearfix">
               <span class="direct-chat-name pull-right">{{chat.NomeUsuario}}</span>
               <span class="direct-chat-timestamp pull-left">{{chat.DataHora | date: 'dd/MM/yyyy hh:mm'}}</span>
             </div>
-            <!-- /.direct-chat-info -->
+            
             <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
-            <!-- /.direct-chat-img -->
+            
             <div class="direct-chat-text">
                 {{chat.Mensagem}}
             </div>
-            <!-- /.direct-chat-text -->
+            
           </div>
-          <!-- /.direct-chat-msg -->
-        </div>
+          
+        </div> -->
         <!--/.direct-chat-messages-->
     
         <!-- Contacts are loaded here -->
