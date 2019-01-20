@@ -39,6 +39,7 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       Senha: this.formBuilder.control('', [Validators.required]),
       ConfirmarSenha: this.formBuilder.control('', [Validators.required]),
       TipoUsuario: this.formBuilder.control(EnumTipoUsuariosAdm.Comum,),
+      NomeCompleto: this.formBuilder.control('', [Validators.required])
     }, {validator: CadastroUsuariosComponent.equalsTo})
 
     if(this.usuarios.Id){      
@@ -68,7 +69,8 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       Nome: content.Content.Dados.Nome,
       Senha: content.Content.Dados.Senha,
       ConfirmarSenha: content.Content.Dados.Senha,
-      TipoUsuario: content.Content.Dados.TipoUsuario
+      TipoUsuario: content.Content.Dados.TipoUsuario,
+      NomeCompleto: content.Content.Dados.NomeCompleto
     });
 
   }

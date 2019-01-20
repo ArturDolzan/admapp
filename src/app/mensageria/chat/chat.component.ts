@@ -3,7 +3,7 @@ import { Chat, EnumTipoChat } from './chat.model';
 import { ChatService } from './chat.service';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { HubsService } from 'src/app/shared/hubs/hubs.service';
-import { tap } from 'rxjs/operators';
+import { tap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ChatComponent implements OnInit {
 
   listaLogados: any[]
+  servicoPublicarAudioChat: any
 
   constructor(private chatService: ChatService,
               private notificationService: NotificationService,
@@ -31,7 +32,17 @@ export class ChatComponent implements OnInit {
     this.hubsService.publicarUsuarioDesconectou.pipe(tap(()=>{
       this.listarLogados()
     }) ).subscribe()
+
     
+    this.servicoPublicarAudioChat = this.hubsService.publicarParaUsuario.pipe( tap(mensagem=>{
+        this.listarLogados()
+      
+    })).subscribe() 
+    
+  }
+
+  ngOnDestroy() {
+    this.servicoPublicarAudioChat.unsubscribe()
   }
 
   listarLogados() {
@@ -47,13 +58,27 @@ export class ChatComponent implements OnInit {
 
   qtdeLogados() {
     if(this.listaLogados){
-      return this.listaLogados.length
+      let qtde = this.listaLogados.length - 1
+
+      if(qtde < 0){
+        qtde = 0
+      }
+
+      return qtde
     }
     return 0
   }
 
   navegarChatDirect(usuario) {
     this.router.navigate(['/chat-direct', usuario.ConnectionId, usuario.AppUser])
+  }
+
+  renderizarSino(user) {
+    return user.QtdeMsgNaoVisualizadas > 0 ? true : false
+  }
+
+  usuarioLogado() {
+    return this.chatService.getUsuario()
   }
 
 }

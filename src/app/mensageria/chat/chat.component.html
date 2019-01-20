@@ -1,40 +1,11 @@
-<!-- <section class=" col-sm-6 col-xs-12">
-    <section class="invoice">
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-              <h2 class="page-header">
-                <i class="fa fa-user"></i> Chat ({{qtdeLogados()}})
-              </h2>
-            </div>
-          </div>
-
-      
-        <ul *ngFor="let user of listaLogados" class="list-group">
-            <a class="linkChat" (click)="navegarChatDirect(user)">
-              <div class="row">
-                  <div class="col-sm-2 col-xs-12">
-                      <img src="assets/user2-160x160.jpg" class="direct-chat-img" alt="User Image">
-                  </div>
-
-                  <div class="col-sm-10 col-xs-12">
-                      <li class="list-group-item">{{user.AppUser}} <span class="badge badge-pill badge-primary">4</span></li>
-                  </div>
-              </div>
-            </a>
-        </ul>
-         
-
-  </section>
-</section> -->
-
 
 <div class="col-md-3">
     <div class="box box-warning box-solid">
       <div class="box-header with-border">
-        <h3 class="box-title">Chat ({{qtdeLogados()}})</h3>
+        <h3 class="box-title">Chat ({{qtdeLogados()}}) </h3>
 
         <div class="box-tools pull-right">
+            
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
         </div>
@@ -43,14 +14,16 @@
       <!-- /.box-header -->
       <div class="box-body">
         <ul *ngFor="let user of listaLogados" class="list-group">
-            <a class="linkChat" (click)="navegarChatDirect(user)">
+            
+            <a *ngIf="user.AppUser !== usuarioLogado()" class="linkChat" (click)="navegarChatDirect(user)">
               <div class="row">
+                  
                   <div class="col-sm-2 col-xs-12">
                       <img src="assets/user2-160x160.jpg" class="direct-chat-img" alt="User Image">
                   </div>
 
                   <div class="col-sm-10 col-xs-12">
-                      <li class="list-group-item">{{user.AppUser}} <span class="badge badge-pill badge-primary">4</span></li>
+                      <li class="list-group-item">{{user.AppUser}} <span *ngIf="renderizarSino(user)" class="badge bg-red">{{user.QtdeMsgNaoVisualizadas}}</span> </li>
                   </div>
               </div>
             </a>

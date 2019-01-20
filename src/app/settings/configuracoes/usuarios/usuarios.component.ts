@@ -21,7 +21,7 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
   usuarios: Usuarios[]
   enumTipoUsuariosAdm = EnumTipoUsuariosAdm
 
-  displayedColumns: string[] = ['actionsColumn', 'Codigo', 'Nome']
+  displayedColumns: string[] = ['actionsColumn', 'Codigo', 'Nome', 'NomeCompleto']
   dataSource
 
   @ViewChild(MatPaginator) paginator: MatPaginator

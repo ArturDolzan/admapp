@@ -33,8 +33,13 @@
           <mat-cell *matCellDef="let usuarios"> {{usuarios.Id}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="Nome">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Usuário </mat-header-cell>
           <mat-cell *matCellDef="let usuarios"> {{usuarios.Nome}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="NomeCompleto">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let usuarios"> {{usuarios.NomeCompleto}} </mat-cell>
         </ng-container>
        
 

@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { BroadcastEventListener, SignalR } from "ng2-signalr";
+import { ChatDirect } from "src/app/mensageria/chat-direct/chat-direct.model";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,8 @@ export class HubsService {
     con: any
     _connection: any
 
-    publicarParaUsuario = new EventEmitter<string>()
+    publicarParaUsuario = new EventEmitter<ChatDirect>()
+    publicarDigitando = new EventEmitter<string>()
 
     publicarUsuarioConectou = new EventEmitter()
     publicarUsuarioDesconectou = new EventEmitter()
@@ -30,7 +32,15 @@ export class HubsService {
       this.registrarEscutaPublicarParaUsuario()
       this.registrarUsuarioConectou()
       this.registrarUsuarioDesconectou()
+      this.registrarEscutaEnviarDigitando()
 
+    }
+
+    playAudio(){
+      let audio = new Audio();
+      audio.src = "assets/audio/chat.wav";
+      audio.load();
+      audio.play();
     }
 
     registrarEscutaPublicarParaUsuario(){
@@ -38,9 +48,18 @@ export class HubsService {
       this._connection.listen(onPublicarparaUsuario);
       
       onPublicarparaUsuario.subscribe((data) => {
-        console.log(data.Mensagem)
-        alert(data.Mensagem)
-        this.publicarParaUsuario.emit(data.Mensagem)
+        this.playAudio()
+        this.publicarParaUsuario.emit(data)
+      });
+    }
+
+    registrarEscutaEnviarDigitando(){
+      let onPublicarDigitando = new BroadcastEventListener<any>('EnviarDigitando');
+      this._connection.listen(onPublicarDigitando);
+      
+      onPublicarDigitando.subscribe((usuario) => {
+
+        this.publicarDigitando.emit(usuario)
       });
     }
 
@@ -64,10 +83,16 @@ export class HubsService {
 
 
 
-    enviarMensagemParaUsuario(usuario: string, mensagem: string) {
-        this._connection.invoke('EnviarMensagemParaUsuario', usuario, mensagem).then((data: string[]) => {
+    enviarMensagemParaUsuario(usuarioOrigem: string, usuarioDestino: string, mensagem: string) {
+        this._connection.invoke('EnviarMensagemParaUsuario', usuarioOrigem, usuarioDestino, mensagem).then((data: string[]) => {
             
         });
     }
+
+    enviarDigitandoMensagem(usuarioOrigem: string, usuarioDestino: string) {
+      this._connection.invoke('EnviarDigitandoMensagem', usuarioOrigem, usuarioDestino).then((data: string[]) => {
+          
+      });
+  }
 
 }

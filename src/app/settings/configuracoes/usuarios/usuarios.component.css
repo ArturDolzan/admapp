@@ -17,6 +17,13 @@
       /* display:flex;
       justify-content:flex-end; */
   }
+
+  mat-cell:nth-child(3),
+  mat-header-cell:nth-child(3) {
+      flex: 0 0 15%;
+      /* display:flex;
+      justify-content:flex-end; */
+  }
     
     th.mat-sort-header-sorted {
       color: black;

@@ -2,6 +2,8 @@ export class Usuarios {
     Id: number
     Nome: string
     Senha: string
+    Foto: string
+    NomeCompleto: string
     TipoUsuarios: EnumTipoUsuariosAdm
 }
 

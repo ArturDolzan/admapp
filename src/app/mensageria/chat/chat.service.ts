@@ -21,8 +21,12 @@ export class ChatService extends CrudService {
     
         let headers      = this.getHeaders();
         let options      = new RequestOptions({ headers: headers }); 
+
+        let body = JSON.stringify({
+            Usuario: this.getUsuario()
+          })
     
-        return this.http.post(`${URL_API}/${this.controllerName}/RecuperarUsuariosConectadosChat`, options)
+        return this.http.post(`${URL_API}/${this.controllerName}/RecuperarUsuariosConectadosChat`, body, options)
                 .pipe(map(response => response.json().Content))            
       }
 }
