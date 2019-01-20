@@ -15,3 +15,31 @@
     overflow: hidden;
     display: flex;
 }
+
+.emojiPosition {
+    padding-right: 82px;
+    z-index: 99;
+    top: 32px;
+}
+
+.emojiPopVisivel { 
+    position: fixed;
+    top: 420px;
+    left:250px;
+    width: 355px;
+    z-index: 999;
+    visibility: visible;
+}
+
+.emojiPopInvisivel { 
+    visibility: hidden;
+    position: fixed;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.inputField {
+    flex: 1;
+}

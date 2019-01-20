@@ -18,7 +18,8 @@ import { HubsComponent } from './hubs/hubs.component';
 import { HubsService } from './hubs/hubs.service';
 
 @NgModule({
-  declarations: [InputComponent, SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent, ChatComponent, HubsComponent, HubsComponent],
+  declarations: [InputComponent,
+                SnackbarComponent, RadioComponent, LinkAtivoInativoComponent, ConfirmacaoComponent, AutolistComponent, ListfilterComponent, BotaonovolistarComponent, BotoescadastroComponent, ChatComponent, HubsComponent, HubsComponent],
   imports: [
     CommonModule,
     FormsModule,

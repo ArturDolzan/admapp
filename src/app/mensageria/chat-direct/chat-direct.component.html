@@ -1,11 +1,14 @@
-<div class="row">
+
+
+<form [formGroup]="cadForm" novalidate>
+  
   <div class="col-md-4 col-xs-12">
   <div class="box box-danger direct-chat direct-chat-danger">
       <div class="box-header with-border">
         <h3 class="box-title">Chat ({{renderizarNomeChat()}})</h3>
         <div class="box-tools pull-right">
          
-          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          
           <!-- In box-tools add this button if you intend to use the contacts pane -->
           
         </div>
@@ -26,8 +29,8 @@
             <!-- /.direct-chat-info -->
             <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
             <!-- /.direct-chat-img -->
-            <div class="direct-chat-text">
-              {{chat.Mensagem}}
+            <div class="direct-chat-text" [innerHtml]="renderizaEmoji(chat.Mensagem) | sanitizeHtml">
+              
             </div>
             <!-- /.direct-chat-text -->
           </div>
@@ -41,15 +44,28 @@
       <!-- /.box-body -->
       <div class="box-footer">
         <div class="input-group">
-          <input type="text" name="message" #mensagem placeholder="Digite aqui a mensagem =) ..." 
-          class="form-control" (keydown.enter)="enviarMensagem(mensagem.value);mensagem.value=''">
+
+
+          <input id="inputEmoji" formControlName="CampoDigitando" type="text" name="message" #mensagem placeholder="Digite aqui a mensagem =) ..." 
+          class="form-control " (keydown.enter)="enviarMensagem(mensagem.value);mensagem.value=''">
+          
+          
+          <div id="chatcont" class="emojiPosition">
+            <!-- <span [class.wdt-emoji-bundle-enabled]="true" [class.wdt-emoji-open-on-colon]="true" ></span> -->
+            <emoji-mart (emojiSelect)="inserirEmoji(emoji, $event)" [class.emojiPopVisivel]="exibirTelaEmoji()" [class.emojiPopInvisivel]="!exibirTelaEmoji()"></emoji-mart>
+          </div>
+          
           <span class="input-group-btn">
+              <button type="button" class="btn btn-link btn-flat" (click)="alterarTelaEmoji()">  <i class="fa fa-star"></i></button>
               <button type="button" class="btn btn-danger btn-flat" (click)="enviarMensagem(mensagem.value);mensagem.value=''">Enviar</button>
            </span>
         </div>
+
+       
         
       </div>
       <!-- /.box-footer-->
     </div>
   </div>
 </div>
+</form>

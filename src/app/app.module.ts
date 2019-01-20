@@ -38,6 +38,9 @@ import { CidadesComponent } from './settings/configuracoes/cidades/cidades.compo
 import { CadastroCidadesComponent } from './settings/configuracoes/cidades/cadastro-cidades/cadastro-cidades.component';
 import { URL_HUB } from './app.config';
 import { ChatDirectComponent } from './mensageria/chat-direct/chat-direct.component';
+import { SanitizeHtmlPipe } from './shared/pipes/safe.pipe';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
+
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { ChatDirectComponent } from './mensageria/chat-direct/chat-direct.compon
     CadastroEstadosComponent,
     CidadesComponent,
     CadastroCidadesComponent,
-    ChatDirectComponent
+    ChatDirectComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -74,7 +78,8 @@ import { ChatDirectComponent } from './mensageria/chat-direct/chat-direct.compon
     HttpClientModule,
     HttpModule,
     SharedModule.forRoot(),
-    AgGridModule.withComponents(null)
+    AgGridModule.withComponents(null),
+    PickerModule
   ],
   entryComponents:[
     CadastroMateriaisComponent

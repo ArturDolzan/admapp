@@ -5,6 +5,7 @@ import { ChatDirectService } from './chat-direct.service';
 import { NotificationService } from '../../shared/messages/notification.service';
 import { tap, debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-direct',
@@ -15,7 +16,10 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private chatDirectService: ChatDirectService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private formBuilder: FormBuilder) { }
+
+  cadForm: FormGroup        
 
   conectionId: string
   appUserDestino: string
@@ -26,10 +30,20 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   servicoPublicarParaUsuarioChat: any
   servicoPublicarDigitar: any
   servicoInicioDigitar: any
+  telaEmoji: boolean = false
+  emoji: any
 
   @ViewChild('mensagem') mensagem: ElementRef
 
   ngOnInit() {
+    this.cadForm = this.formBuilder.group({
+      CampoDigitando: this.formBuilder.control("")
+    })
+
+    this.cadForm.setValue({
+      CampoDigitando: ""
+    });
+
     this.conectionId = this.route.snapshot.params['ConectionId']
     this.appUserDestino = this.route.snapshot.params['AppUser']
 
@@ -94,11 +108,23 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   }
 
   enviarMensagem(mensagem) {
+    
     if(mensagem){
+
       this.chatDirectService.enviarMensagem(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino, mensagem)
       this.renderizarMensagemEnviada(mensagem)
       this.iniciouDigitando = false
     }
+  }
+
+  renderizaEmoji(mensagem: string){
+
+    if(!mensagem){
+      return null
+    }
+
+    // @ts-ignore
+    return wdtEmojiBundle.render(mensagem)
   }
 
   renderizarMensagemEnviada(mensagem: string) {
@@ -114,6 +140,12 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     }
 
     this.chatDirect = [...this.chatDirect , chat];
+
+    this.cadForm.controls['CampoDigitando'].setValue("")
+    
+    if(this.telaEmoji){
+      this.telaEmoji = false
+    }
   }
 
   renderizarMensagemRecebida(chat: ChatDirect) {
@@ -149,6 +181,20 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
   renderizarDigitando() {
     return this.digitando
+  }
+
+  exibirTelaEmoji() {
+    return this.telaEmoji
+  }
+
+  alterarTelaEmoji() { 
+    this.telaEmoji = !this.telaEmoji
+  }
+
+  inserirEmoji(emoji, $event) {
+    let emo = $event.emoji.colons
+
+    this.cadForm.controls['CampoDigitando'].setValue(this.cadForm.controls['CampoDigitando'].value + emo)
   }
 
 }

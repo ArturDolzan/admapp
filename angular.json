@@ -32,7 +32,9 @@
               "./node_modules/admin-lte/plugins/iCheck/flat/red.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "./node_modules/ag-grid-community/dist/styles/ag-theme-balham.css"
+              "./node_modules/ag-grid-community/dist/styles/ag-theme-balham.css",
+              "./src/assets/sheets/wdt-emoji-bundle.css",
+              "./node_modules/@ctrl/ngx-emoji-mart/picker.css"
             ],
             "scripts": ["./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/admin-lte/dist/js/adminlte.min.js",
@@ -42,7 +44,8 @@
               "./node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
               "./src/app/scripts/js.cookie.js",
               "./src/app/scripts/jquery.signalR-2.4.0.min.js",
-              "./src/app/scripts/RealTime.js"
+              "./src/app/scripts/emoji.min.js",
+              "./src/app/scripts/wdt-emoji-bundle.min.js"
             ]
           },
           "configurations": {
