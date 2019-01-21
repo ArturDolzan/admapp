@@ -52,12 +52,15 @@
           
           <div id="chatcont" class="emojiPosition">
             <!-- <span [class.wdt-emoji-bundle-enabled]="true" [class.wdt-emoji-open-on-colon]="true" ></span> -->
-            <emoji-mart (emojiSelect)="inserirEmoji(emoji, $event)" [class.emojiPopVisivel]="exibirTelaEmoji()" [class.emojiPopInvisivel]="!exibirTelaEmoji()"></emoji-mart>
+            <emoji-mart (emojiSelect)="inserirEmoji(emoji, $event)" 
+              [class.emojiPopVisivel]="exibirTelaEmoji()" 
+              [class.emojiPopInvisivel]="!exibirTelaEmoji()"
+              [title]="emoji" [showPreview]="false" [perLine]="7"></emoji-mart>
           </div>
           
           <span class="input-group-btn">
-              <button type="button" class="btn btn-link btn-flat" (click)="alterarTelaEmoji()">  <i class="fa fa-star"></i></button>
-              <button type="button" class="btn btn-danger btn-flat" (click)="enviarMensagem(mensagem.value);mensagem.value=''">Enviar</button>
+              <button type="button" class="btn btn-link btn-flat" (click)="alterarTelaEmoji()"> <i class="fa fa-smile fa-lg"></i></button>
+              <button type="button" class="btn btn-danger btn-flat" (click)="enviarMensagem(mensagem.value);mensagem.value=''"><i class="fa fa-paper-plane fa-lg"></i></button>
            </span>
         </div>
 

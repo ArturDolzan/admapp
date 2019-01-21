@@ -28,6 +28,7 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
 
   cadForm: FormGroup              
   usuarios: Usuarios = new Usuarios()  
+  url: string;
 
   ngOnInit() {
     
@@ -38,8 +39,9 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       Nome: this.formBuilder.control('', [Validators.required]),
       Senha: this.formBuilder.control('', [Validators.required]),
       ConfirmarSenha: this.formBuilder.control('', [Validators.required]),
-      TipoUsuario: this.formBuilder.control(EnumTipoUsuariosAdm.Comum,),
-      NomeCompleto: this.formBuilder.control('', [Validators.required])
+      TipoUsuario: this.formBuilder.control(EnumTipoUsuariosAdm.Comum),
+      NomeCompleto: this.formBuilder.control('', [Validators.required]),
+      Foto: this.formBuilder.control('')
     }, {validator: CadastroUsuariosComponent.equalsTo})
 
     if(this.usuarios.Id){      
@@ -70,9 +72,10 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       Senha: content.Content.Dados.Senha,
       ConfirmarSenha: content.Content.Dados.Senha,
       TipoUsuario: content.Content.Dados.TipoUsuario,
-      NomeCompleto: content.Content.Dados.NomeCompleto
+      NomeCompleto: content.Content.Dados.NomeCompleto,
+      Foto: content.Content.Dados.Foto
     });
-
+    this.url = 'data:image/jpeg;base64,' + content.Content.Dados.Foto
   }
 
   isNew(): boolean{
@@ -118,6 +121,39 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
     })
 
   }
+
+  onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+
+      let me = this 
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        let base64 = ""
+
+        // @ts-ignore
+        if(event.target.result.indexOf('jpeg') === -1){
+          this.notificationService.notify('Apenas imagem do tipo JPEG é permitido!')
+          this.url = undefined
+        }else{       
+          // @ts-ignore   
+          this.url = event.target.result;   
+          // @ts-ignore
+          base64 = event.target.result.replace('data:image/jpeg;base64,', '')
+        }
+
+        this.cadForm.controls['Foto'].setValue(base64)
+      }
+    }
+  }
+
+  renderizaImagemUsuario() {    
+    return this.url === undefined ? "assets/user.png" : this.url
+  }
+
+
 
 
 }

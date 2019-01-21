@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { ChatDirect, EnumChatVisualizado } from './chat-direct.model';
 import { ActivatedRoute } from '@angular/router';
 import { ChatDirectService } from './chat-direct.service';
@@ -20,6 +20,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
               private formBuilder: FormBuilder) { }
 
   cadForm: FormGroup        
+  @ViewChildren('mensagem') vcMensagem;
 
   conectionId: string
   appUserDestino: string
@@ -71,7 +72,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
     this.servicoInicioDigitar = fromEvent(this.mensagem.nativeElement,'keyup')
           .pipe(
-              debounceTime(100),
+              debounceTime(125),
               distinctUntilChanged(),
               tap((data) => {
                 let tecla: any = data
@@ -195,6 +196,8 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     let emo = $event.emoji.colons
 
     this.cadForm.controls['CampoDigitando'].setValue(this.cadForm.controls['CampoDigitando'].value + emo)
+
+    this.vcMensagem.first.nativeElement.focus();
   }
 
 }

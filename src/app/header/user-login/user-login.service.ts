@@ -34,11 +34,17 @@ export class ServUserLogin extends AppHeaders {
         let userLogin: UserLogin = {
             Id: 1,
             Nome: 'App',
+            NomeCompleto: 'NomeCompleto',
+            Foto: ' ',
             Status: EnumUserLogin.online
         }
 
         this.autenticado().subscribe(resposta => {
+            
            userLogin.Nome = this.getUsuario()
+           userLogin.NomeCompleto = this.getNomeUsuario()
+           userLogin.Foto = this.getFotoUsuario()
+
         }, error => {
             this.redirecionarUrlLogin()
         })
