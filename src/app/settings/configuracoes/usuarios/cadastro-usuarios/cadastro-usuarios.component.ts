@@ -6,6 +6,7 @@ import { NotificationService } from '../../../../shared/messages/notification.se
 import { Usuarios, EnumTipoUsuariosAdm } from '../usuarios.model';
 import { CadastroCrud } from '../../../../shared/cadastro-crud/cadastroCrud';
 import { ConfirmacaoService, EnumTipoConfirmacao } from '../../../../shared/messages/confirmacao/confirmacao.service';
+import { ServUserLogin } from 'src/app/header/user-login/user-login.service';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -19,6 +20,7 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
               private usuariosService: UsuariosService,
               private notificationService: NotificationService,
               private confirmacaoService: ConfirmacaoService,
+              private servUserLogin: ServUserLogin,
               public router: Router) {
                 super(router)
 
@@ -75,7 +77,11 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       NomeCompleto: content.Content.Dados.NomeCompleto,
       Foto: content.Content.Dados.Foto
     });
-    this.url = 'data:image/jpeg;base64,' + content.Content.Dados.Foto
+
+    if(content.Content.Dados.Foto){
+      this.url = 'data:image/jpeg;base64,' + content.Content.Dados.Foto
+    }
+    
   }
 
   isNew(): boolean{
@@ -94,6 +100,7 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
         .subscribe(response => {
           
           this.notificationService.notify(response.Mensagem)
+          this.servUserLogin.usuarioAutenticadoEmit.emit()
 
           this.navegarParaLista()
         }, error => {

@@ -20,15 +20,15 @@ export class AppHeaders implements IAppHeaders {
         return Cookies.get('AppUser') == null ? 'AppNoAuth' : Cookies.get('AppUser')
     }
 
-    getNomeUsuario(): string {
-        // @ts-ignore
-        return Cookies.get('AppNomeCompleto') == null ? 'NomeCompleto' : Cookies.get('AppNomeCompleto')
-    }
+    // getNomeUsuario(): string {
+    //     // @ts-ignore
+    //     return Cookies.get('AppNomeCompleto') == null ? 'NomeCompleto' : Cookies.get('AppNomeCompleto')
+    // }
 
-    getFotoUsuario(): string {
-        // @ts-ignore
-        return Cookies.get('AppFoto') == null ? 'assets/user.png' : Cookies.get('AppFoto')
-    }
+    // getFotoUsuario(): string {
+    //     // @ts-ignore
+    //     return Cookies.get('AppFoto') == null ? 'assets/user.png' : Cookies.get('AppFoto')
+    // }
 
     removerCookies(){
         // @ts-ignore

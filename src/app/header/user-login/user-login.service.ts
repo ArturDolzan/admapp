@@ -1,4 +1,4 @@
-import {Injectable, Inject} from '@angular/core'
+import {Injectable, Inject, EventEmitter} from '@angular/core'
 
 import {UserLogin, EnumUserLogin} from './user-login.model'
 import { Http, RequestOptions } from '@angular/http';
@@ -14,6 +14,8 @@ import { DOCUMENT } from '@angular/common';
 })
 
 export class ServUserLogin extends AppHeaders {
+
+    usuarioAutenticadoEmit = new EventEmitter()
 
     constructor(private http: Http, @Inject(DOCUMENT) private document: any){
         super()
@@ -42,8 +44,8 @@ export class ServUserLogin extends AppHeaders {
         this.autenticado().subscribe(resposta => {
             
            userLogin.Nome = this.getUsuario()
-           userLogin.NomeCompleto = this.getNomeUsuario()
-           userLogin.Foto = this.getFotoUsuario()
+
+           this.usuarioAutenticadoEmit.emit()
 
         }, error => {
             this.redirecionarUrlLogin()
@@ -55,5 +57,17 @@ export class ServUserLogin extends AppHeaders {
     redirecionarUrlLogin() {
         this.document.location.href = URL_LOGIN
     }
+
+    recuperarPorUsuario(): Observable<any>{
+        let body = JSON.stringify({
+          Usuario: this.getUsuario()
+        })
+    
+        let headers      = this.getHeaders();
+        let options      = new RequestOptions({ headers: headers }); 
+    
+        return this.http.post(`${URL_API}/Usuarios/RecuperarPorUsuario`, body, options)
+          .pipe(map(response => response.json().Content))
+      }
 
 }

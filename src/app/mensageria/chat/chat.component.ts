@@ -81,4 +81,8 @@ export class ChatComponent implements OnInit {
     return this.chatService.getUsuario()
   }
 
+  renderizaImagemUsuario(user) {    
+    return (user.Foto === null || user.Foto === undefined)  ? "assets/user.png" : user.Foto
+  }
+
 }

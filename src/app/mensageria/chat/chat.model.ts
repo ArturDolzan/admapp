@@ -2,7 +2,7 @@ export class Chat {
     NomeUsuario: string
     DataHora: Date
     Mensagem: string
-    CaminhoFoto: string
+    Foto: string
 }
 
 export enum EnumTipoChat {
