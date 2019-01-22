@@ -134,6 +134,13 @@ export class CadastroUsuariosComponent extends CadastroCrud implements OnInit {
       let reader = new FileReader();
 
       let me = this 
+      
+      let size = event.target.files[0].size / 1024
+      if(size > 500) {
+        this.notificationService.notify('É permitido imagens com até 500 kb de tamanho. Reduza a imagem!')
+        this.url = undefined
+        return
+      }
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 

@@ -6,6 +6,8 @@ import { NotificationService } from '../../shared/messages/notification.service'
 import { tap, debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { URL_HUB } from '../../app.config';
+import { ServUserLogin } from '../../header/user-login/user-login.service';
 
 @Component({
   selector: 'app-chat-direct',
@@ -17,6 +19,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute,
               private chatDirectService: ChatDirectService,
               private notificationService: NotificationService,
+              private servUserLogin: ServUserLogin,
               private formBuilder: FormBuilder) { }
 
   cadForm: FormGroup        
@@ -33,6 +36,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   servicoInicioDigitar: any
   telaEmoji: boolean = false
   emoji: any
+  fotoUsuarioLogado: string
 
   @ViewChild('mensagem') mensagem: ElementRef
 
@@ -47,6 +51,11 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
     this.conectionId = this.route.snapshot.params['ConectionId']
     this.appUserDestino = this.route.snapshot.params['AppUser']
+
+    this.servUserLogin.recuperarPorUsuario()
+      .subscribe( conteudo => this.cbRecuperarPorUsuario(conteudo), error => {
+        this.notificationService.notify(JSON.parse(error._body).Mensagem)
+      })
 
     this.chatDirectService.marcarMensagensVisualizadas(this.appUserDestino, this.chatDirectService.recuperarUsuarioLogado()).subscribe(response => {
       
@@ -68,11 +77,33 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     }) ).subscribe()
   }
 
+  cbRecuperarPorUsuario(conteudo) {
+    if(conteudo.Dados.Foto){
+      this.fotoUsuarioLogado =  conteudo.Dados.Foto
+    }
+  }
+
+  renderizaImagemUsuario(chat: ChatDirect) {
+    if(chat.UsuarioOrigem === this.chatDirectService.recuperarUsuarioLogado()){
+      return (this.fotoUsuarioLogado === null || this.fotoUsuarioLogado === undefined)  ? "assets/user.png" : `${URL_HUB}/${this.fotoUsuarioLogado}`
+    }else{
+      return (chat.FotoOrigem === null || chat.FotoOrigem === undefined)  ? "assets/user.png" : `${URL_HUB}/${chat.FotoOrigem}`
+    }
+  }
+
+  renderizaNomeUsuario(chat: ChatDirect) {
+    if(chat.UsuarioOrigem === this.chatDirectService.recuperarUsuarioLogado()){
+      return this.chatDirectService.recuperarUsuarioLogado()
+    }else{
+      return this.appUserDestino
+    }
+  }
+
   ngAfterViewInit() {      
 
     this.servicoInicioDigitar = fromEvent(this.mensagem.nativeElement,'keyup')
           .pipe(
-              debounceTime(125),
+              debounceTime(75),
               distinctUntilChanged(),
               tap((data) => {
                 let tecla: any = data
@@ -136,7 +167,8 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
            UsuarioDestino: this.appUserDestino,
            DataHora: nd,
            Mensagem: mensagem,
-           CaminhoFoto: 'assets/user2-160x160.jpg',
+           FotoOrigem: this.fotoUsuarioLogado,
+           FotoDestino: ' ',
            Visualizado: EnumChatVisualizado.NaoVisualizado
     }
 
@@ -157,7 +189,8 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
          UsuarioDestino: this.appUserDestino,
          DataHora: chat.DataHora,
          Mensagem: chat.Mensagem,
-         CaminhoFoto: chat.CaminhoFoto,
+         FotoOrigem: chat.FotoOrigem,
+         FotoDestino: chat.FotoDestino,
          Visualizado: EnumChatVisualizado.Viualizado
       } 
   

@@ -28,6 +28,13 @@
               </div>
             </a>
         </ul>
+        
+        <div *ngIf="renderizaNinguemOnline()" class="col-sm-12">
+          <p class="lead text-center">
+            Ninguém online no momento
+          </p>
+        </div>
+        
       </div>
       <!-- /.box-body -->
     </div>

@@ -23,11 +23,11 @@
           
           <div *ngFor="let chat of chatDirect" class="direct-chat-msg" [class.right]="posicionarDireita(chat)">
             <div class="direct-chat-info clearfix">
-              <span class="direct-chat-name" [class.pull-left]="posicionarEsquerda(chat)" [class.pull-right]="posicionarDireita(chat)">{{chat.NomeUsuario}}</span>
-              <span class="direct-chat-timestamp" [class.pull-left]="posicionarEsquerda(chat)" [class.pull-right]="posicionarDireita(chat)">{{chat.DataHora | date: 'dd/MM/yyyy hh:mm'}}</span>
+              <span class="direct-chat-name" [class.pull-right]="posicionarDireita(chat)">{{chat.NomeUsuario}}</span>
+              <span class="direct-chat-timestamp"  [class.pull-right]="posicionarDireita(chat)">{{chat.DataHora | date: 'dd/MM/yyyy hh:mm'}}</span>
             </div>
             <!-- /.direct-chat-info -->
-            <img class="direct-chat-img" [src]="chat.CaminhoFoto" alt="message user image">
+            <img class="direct-chat-img" [src]="renderizaImagemUsuario(chat)" alt="message user image">
             <!-- /.direct-chat-img -->
             <div class="direct-chat-text" [innerHtml]="renderizaEmoji(chat.Mensagem) | sanitizeHtml">
               

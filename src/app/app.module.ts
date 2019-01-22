@@ -23,7 +23,6 @@ import {ROUTES} from './app-routing.module';
 import { AboutComponent } from './settings/about/about.component';
 import { MenuSearchComponent } from './menu/menu-search/menu-search.component'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AgGridModule } from 'ag-grid-angular';
 import { MateriaisComponent } from './materiais/materiais.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroMateriaisComponent } from './materiais/cadastro-materiais/cadastro-materiais.component';
@@ -78,7 +77,6 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart'
     HttpClientModule,
     HttpModule,
     SharedModule.forRoot(),
-    AgGridModule.withComponents(null),
     PickerModule
   ],
   entryComponents:[

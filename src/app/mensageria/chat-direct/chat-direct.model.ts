@@ -4,7 +4,8 @@ export class ChatDirect {
     DataHora: Date    
     Mensagem: string
     Visualizado: EnumChatVisualizado
-    CaminhoFoto: string
+    FotoOrigem: string
+    FotoDestino: string
 }
 
 export enum EnumChatVisualizado {

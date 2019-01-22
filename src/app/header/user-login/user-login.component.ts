@@ -3,6 +3,7 @@ import { ServUserLogin } from './user-login.service';
 import { UserLogin } from './user-login.model';
 import { tap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
+import { URL_HUB } from '../../app.config';
 
 @Component({
   selector: 'app-user-login',
@@ -33,11 +34,11 @@ export class UserLoginComponent implements OnInit {
   cbRecuperarPorUsuario(conteudo) {
    
     this.userLogin.Id = conteudo.Dados.Id
-    this.userLogin.Nome = conteudo.Dados.Nome
+    this.userLogin.Nome = conteudo.Dados.Usuario
     this.userLogin.NomeCompleto = conteudo.Dados.NomeCompleto
 
     if(conteudo.Dados.Foto){
-      this.userLogin.Foto = 'data:image/jpeg;base64,' + conteudo.Dados.Foto
+      this.userLogin.Foto =  conteudo.Dados.Foto
     }
     
   }
@@ -48,7 +49,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   renderizaImagemUsuario() {    
-    return (this.userLogin.Foto === ' ' || this.userLogin.Foto === undefined)  ? "assets/user.png" : this.userLogin.Foto
+    return (this.userLogin.Foto === ' ' || this.userLogin.Foto === undefined)  ? "assets/user.png" : `${URL_HUB}/${this.userLogin.Foto}`
   }
 
 }

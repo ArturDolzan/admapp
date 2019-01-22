@@ -5,6 +5,7 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { HubsService } from 'src/app/shared/hubs/hubs.service';
 import { tap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { URL_HUB } from '../../app.config';
 
 @Component({
   selector: 'app-chat',
@@ -82,7 +83,11 @@ export class ChatComponent implements OnInit {
   }
 
   renderizaImagemUsuario(user) {    
-    return (user.Foto === null || user.Foto === undefined)  ? "assets/user.png" : user.Foto
+    return (user.Foto === null || user.Foto === undefined)  ? "assets/user.png" : `${URL_HUB}/${user.Foto}`
+  }
+
+  renderizaNinguemOnline() {
+    return this.qtdeLogados() === 0 ? true : false
   }
 
 }
