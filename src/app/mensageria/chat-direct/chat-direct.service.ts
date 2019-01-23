@@ -23,12 +23,18 @@ export class ChatDirectService extends AppHeaders {
              
             this.publicarDigitando.emit(usuario)
          }) ).subscribe() 
+
+         this.hubService.publicarVisualizado.pipe(tap((usuario)=>{
+             
+            this.publicarVisualizado.emit(usuario)
+         }) ).subscribe() 
     }
 
     controllerName: string = 'Chat'
 
     publicarParaUsuarioChat = new EventEmitter<ChatDirect>()
     publicarDigitando = new EventEmitter()
+    publicarVisualizado = new EventEmitter()
 
     recuperarUsuarioLogado(): string{
         return this.getUsuario()
@@ -70,6 +76,10 @@ export class ChatDirectService extends AppHeaders {
 
     enviarDigitandoMensagem(usuarioOrigem: string, usuarioDestino: string) {
         this.hubService.enviarDigitandoMensagem(usuarioOrigem, usuarioDestino)
+    }
+
+    enviarVisualizado(usuarioOrigem: string, usuarioDestino: string) {
+        this.hubService.enviarVisualizado(usuarioOrigem, usuarioDestino)
     }
 
 }

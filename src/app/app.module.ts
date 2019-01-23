@@ -98,7 +98,7 @@ export class AppModule {
     c.hubName = 'ChatHub'; 
     c.qs = { user: 'adm' };
     c.url = `${URL_HUB}/signalr/hubs` //'http://localhost:55090/signalr/hubs';
-    c.logging = true;
+    c.logging = false;
 
     // >= v5.0.0
     c.executeEventsInZone = true; // optional, default is true

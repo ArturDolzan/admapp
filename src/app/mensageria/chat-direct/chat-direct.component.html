@@ -32,10 +32,11 @@
             <div class="direct-chat-text" [innerHtml]="renderizaEmoji(chat.Mensagem) | sanitizeHtml">
               
             </div>
+            <span *ngIf="renderizaCheck(chat)" class="direct-chat-timestamp" class="pull-right"><i class="fa fa-check" [class.iconCheckNotChecked]="!foiVisualizadoMarcarCheck(chat)" [class.iconCheckChecked]="foiVisualizadoMarcarCheck(chat)"></i></span>
             <!-- /.direct-chat-text -->
           </div>
 
-          <span *ngIf="renderizarDigitando()" class="pull-left">Digitando...</span>
+          <span *ngIf="renderizarDigitando()" class="pull-left direct-chat-timestamp">Digitando...</span>
          
         <!-- Contacts are loaded here -->
        
@@ -47,7 +48,8 @@
 
 
           <input id="inputEmoji" formControlName="CampoDigitando" type="text" name="message" #mensagem placeholder="Digite aqui a mensagem =) ..." 
-          class="form-control " (keydown.enter)="enviarMensagem(mensagem.value);mensagem.value=''">
+          class="form-control " (keydown.enter)="enviarMensagem(mensagem.value);mensagem.value=''"
+          (focus)="focouMensagem()" (blur)="focoMensagem = false">
           
           
           <div id="chatcont" class="emojiPosition">

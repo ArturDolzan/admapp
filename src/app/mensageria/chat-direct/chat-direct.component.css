@@ -43,3 +43,11 @@
 .inputField {
     flex: 1;
 }
+
+.iconCheckNotChecked {
+    color:#A5A6A6;
+}
+
+.iconCheckChecked {
+    color: #49A8DF;
+}

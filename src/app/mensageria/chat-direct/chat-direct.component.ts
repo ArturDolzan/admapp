@@ -33,10 +33,12 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   chatDirect: ChatDirect[] = []
   servicoPublicarParaUsuarioChat: any
   servicoPublicarDigitar: any
+  servicoPublicarVisualizado: any
   servicoInicioDigitar: any
   telaEmoji: boolean = false
   emoji: any
   fotoUsuarioLogado: string
+  focoMensagem: boolean = false;
 
   @ViewChild('mensagem') mensagem: ElementRef
 
@@ -57,12 +59,6 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
         this.notificationService.notify(JSON.parse(error._body).Mensagem)
       })
 
-    this.chatDirectService.marcarMensagensVisualizadas(this.appUserDestino, this.chatDirectService.recuperarUsuarioLogado()).subscribe(response => {
-      
-    }, error => {
-      this.notificationService.notify(JSON.parse(error._body).Mensagem)
-    })
-
     this.recuperarChat()    
 
     this.servicoPublicarParaUsuarioChat = this.chatDirectService.publicarParaUsuarioChat.pipe(tap(mensagem=>{
@@ -74,6 +70,14 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
       if(usuario === this.appUserDestino){
         this.digitando = true
       }
+    }) ).subscribe()
+
+    this.servicoPublicarVisualizado = this.chatDirectService.publicarVisualizado.pipe(tap((usuario)=>{
+     
+      if(usuario === this.appUserDestino){
+        this.alterarParaVisualizado()
+      }
+      
     }) ).subscribe()
   }
 
@@ -103,7 +107,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
     this.servicoInicioDigitar = fromEvent(this.mensagem.nativeElement,'keyup')
           .pipe(
-              debounceTime(75),
+              debounceTime(150),
               distinctUntilChanged(),
               tap((data) => {
                 let tecla: any = data
@@ -197,20 +201,27 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
       this.chatDirect = [...this.chatDirect , chat];
 
       this.digitando = false
-
-      this.chatDirectService.marcarMensagensVisualizadas(this.appUserDestino, this.chatDirectService.recuperarUsuarioLogado()).subscribe(response => {
-        this.iniciouDigitando = false
-      }, error => {
-        this.notificationService.notify(JSON.parse(error._body).Mensagem)
-      })
       
+      if(this.focoMensagem){
+        this.chatDirectService.enviarVisualizado(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
+        this.marcarMensagensVisualizadas()
+      }
     }    
+  }
+
+  marcarMensagensVisualizadas() {
+    this.chatDirectService.marcarMensagensVisualizadas(this.appUserDestino, this.chatDirectService.recuperarUsuarioLogado()).subscribe(response => {
+        
+    }, error => {
+      this.notificationService.notify(JSON.parse(error._body).Mensagem)
+    })
   }
 
   ngOnDestroy() {
     this.servicoPublicarParaUsuarioChat.unsubscribe()
     this.servicoInicioDigitar.unsubscribe()
     this.servicoPublicarDigitar.unsubscribe()
+    this.servicoPublicarVisualizado.unsubscribe()
   }
 
   renderizarDigitando() {
@@ -231,6 +242,29 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     this.cadForm.controls['CampoDigitando'].setValue(this.cadForm.controls['CampoDigitando'].value + emo)
 
     this.vcMensagem.first.nativeElement.focus();
+  }
+
+  renderizaCheck(chat: ChatDirect) {
+    return chat.UsuarioOrigem === this.chatDirectService.recuperarUsuarioLogado()
+  }
+
+  foiVisualizadoMarcarCheck(chat: ChatDirect) {
+    return chat.Visualizado === EnumChatVisualizado.Viualizado
+  }
+
+  focouMensagem() {
+    this.focoMensagem = true
+
+    this.chatDirectService.enviarVisualizado(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
+    this.marcarMensagensVisualizadas()
+
+  }
+
+  alterarParaVisualizado() {
+    let j: any;
+    for (j in this.chatDirect) {
+      this.chatDirect[j].Visualizado = EnumChatVisualizado.Viualizado;
+    }
   }
 
 }

@@ -12,6 +12,7 @@ export class HubsService {
 
     publicarParaUsuario = new EventEmitter<ChatDirect>()
     publicarDigitando = new EventEmitter<string>()
+    publicarVisualizado = new EventEmitter<string>()
 
     publicarUsuarioConectou = new EventEmitter()
     publicarUsuarioDesconectou = new EventEmitter()
@@ -33,6 +34,7 @@ export class HubsService {
       this.registrarUsuarioConectou()
       this.registrarUsuarioDesconectou()
       this.registrarEscutaEnviarDigitando()
+      this.registrarEscutaEnviarVisualizado()
 
     }
 
@@ -60,6 +62,16 @@ export class HubsService {
       onPublicarDigitando.subscribe((usuario) => {
 
         this.publicarDigitando.emit(usuario)
+      });
+    }
+
+    registrarEscutaEnviarVisualizado(){
+      let onPublicarVisualizado = new BroadcastEventListener<any>('EnviarVisualizado');
+      this._connection.listen(onPublicarVisualizado);
+      
+      onPublicarVisualizado.subscribe((usuario) => {
+
+        this.publicarVisualizado.emit(usuario)
       });
     }
 
@@ -93,6 +105,12 @@ export class HubsService {
       this._connection.invoke('EnviarDigitandoMensagem', usuarioOrigem, usuarioDestino).then((data: string[]) => {
           
       });
-  }
+    }
+
+    enviarVisualizado(usuarioOrigem: string, usuarioDestino: string) {
+      this._connection.invoke('EnviarVisualizado', usuarioOrigem, usuarioDestino).then((data: string[]) => {
+            
+      });
+    }
 
 }
