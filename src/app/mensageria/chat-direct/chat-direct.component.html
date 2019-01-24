@@ -1,6 +1,3 @@
-
-
-<form [formGroup]="cadForm" novalidate>
   
   <div class="col-md-4 col-xs-12">
   <div class="box box-danger direct-chat direct-chat-danger">
@@ -47,10 +44,11 @@
         <div class="input-group">
 
 
-          <input id="inputEmoji" formControlName="CampoDigitando" type="text" name="message" #mensagem placeholder="Digite aqui a mensagem =) ..." 
-          class="form-control " (keydown.enter)="enviarMensagem(mensagem.value);mensagem.value=''"
-          (focus)="focouMensagem()" (blur)="focoMensagem = false">
-          
+          <form [formGroup]="cadForm" novalidate>
+            <input id="inputEmoji" formControlName="CampoDigitando" type="text"  placeholder="Digite aqui a mensagem =)" 
+            class="form-control" 
+            (focus)="focouMensagem()" (blur)="focoMensagem = false">
+          </form>
           
           <div id="chatcont" class="emojiPosition">
             <!-- <span [class.wdt-emoji-bundle-enabled]="true" [class.wdt-emoji-open-on-colon]="true" ></span> -->
@@ -62,7 +60,7 @@
           
           <span class="input-group-btn">
               <button type="button" class="btn btn-link btn-flat" (click)="alterarTelaEmoji()"> <i class="fa fa-smile fa-lg"></i></button>
-              <button type="button" class="btn btn-danger btn-flat" (click)="enviarMensagem(mensagem.value);mensagem.value=''"><i class="fa fa-paper-plane fa-lg"></i></button>
+              <button type="button" class="btn btn-danger btn-flat" (click)="enviarMensagem()"><i class="fa fa-paper-plane fa-lg"></i></button>
            </span>
         </div>
 
@@ -73,4 +71,3 @@
     </div>
   </div>
 </div>
-</form>

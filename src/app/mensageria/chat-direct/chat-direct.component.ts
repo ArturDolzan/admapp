@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren, HostListener } from '@angular/core';
 import { ChatDirect, EnumChatVisualizado } from './chat-direct.model';
 import { ActivatedRoute } from '@angular/router';
 import { ChatDirectService } from './chat-direct.service';
@@ -23,7 +23,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
               private formBuilder: FormBuilder) { }
 
   cadForm: FormGroup        
-  @ViewChildren('mensagem') vcMensagem;
+  //@ViewChildren('mensagem') vcMensagem;
 
   conectionId: string
   appUserDestino: string
@@ -34,13 +34,13 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
   servicoPublicarParaUsuarioChat: any
   servicoPublicarDigitar: any
   servicoPublicarVisualizado: any
-  servicoInicioDigitar: any
+  
   telaEmoji: boolean = false
   emoji: any
   fotoUsuarioLogado: string
   focoMensagem: boolean = false;
 
-  @ViewChild('mensagem') mensagem: ElementRef
+  //@ViewChild('mensagem') mensagem: ElementRef
 
   ngOnInit() {
     this.cadForm = this.formBuilder.group({
@@ -105,18 +105,18 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {      
 
-    this.servicoInicioDigitar = fromEvent(this.mensagem.nativeElement,'keyup')
-          .pipe(
-              debounceTime(150),
-              distinctUntilChanged(),
-              tap((data) => {
-                let tecla: any = data
-                if(tecla.key !== 'Enter' && !this.iniciouDigitando){
-                  this.chatDirectService.enviarDigitandoMensagem(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
-                  this.iniciouDigitando = true
-                }
-              })
-          ).subscribe();
+    // this.servicoInicioDigitar = fromEvent(this.mensagem.nativeElement,'keyup')
+    //       .pipe(
+    //           debounceTime(450),
+    //           distinctUntilChanged(),
+    //           tap((data) => {
+    //             let tecla: any = data
+    //             if(tecla.key !== 'Enter' && !this.iniciouDigitando){
+    //               this.chatDirectService.enviarDigitandoMensagem(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
+    //               this.iniciouDigitando = true
+    //             }
+    //           })
+    //       ).subscribe();
   }
 
   renderizarNomeChat() {
@@ -143,10 +143,24 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     return chat.UsuarioDestino === this.appUserDestino
   }
 
-  enviarMensagem(mensagem) {
-    
-    if(mensagem){
+  enviarMensagemKey($event) {
 
+    if($event.key === "Enter"){
+
+      this.enviarMensagem()
+    }else{
+      if(!this.iniciouDigitando){
+          this.chatDirectService.enviarDigitandoMensagem(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
+          this.iniciouDigitando = true
+      }
+    }
+  }
+
+  enviarMensagem() {
+    let mensagem = this.cadForm.controls['CampoDigitando'].value
+
+    if(mensagem){
+      this.cadForm.controls['CampoDigitando'].setValue('')
       this.chatDirectService.enviarMensagem(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino, mensagem)
       this.renderizarMensagemEnviada(mensagem)
       this.iniciouDigitando = false
@@ -219,7 +233,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() {
     this.servicoPublicarParaUsuarioChat.unsubscribe()
-    this.servicoInicioDigitar.unsubscribe()
+    
     this.servicoPublicarDigitar.unsubscribe()
     this.servicoPublicarVisualizado.unsubscribe()
   }
@@ -241,7 +255,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
 
     this.cadForm.controls['CampoDigitando'].setValue(this.cadForm.controls['CampoDigitando'].value + emo)
 
-    this.vcMensagem.first.nativeElement.focus();
+    //this.vcMensagem.first.nativeElement.focus();
   }
 
   renderizaCheck(chat: ChatDirect) {
@@ -264,6 +278,14 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     let j: any;
     for (j in this.chatDirect) {
       this.chatDirect[j].Visualizado = EnumChatVisualizado.Viualizado;
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+
+    if(this.focoMensagem){
+      this.enviarMensagemKey(event) 
     }
   }
 

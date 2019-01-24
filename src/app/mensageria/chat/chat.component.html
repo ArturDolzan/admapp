@@ -16,17 +16,16 @@
         <ul *ngFor="let user of listaLogados" class="list-group">
             
             <a *ngIf="user.AppUser !== usuarioLogado()" class="linkChat" (click)="navegarChatDirect(user)">
+           
               <div class="row">
-                  
-                  <div class="col-sm-2 col-xs-12">
-                      <img [src]="renderizaImagemUsuario(user)" class="direct-chat-img" alt="User Image">
+                  <div class="col-md-3">
+                    <img [src]="renderizaImagemUsuario(user)" class="direct-chat-img" alt="User Image">
                   </div>
-
-                  <div class="col-sm-10 col-xs-12">
-                      <li class="list-group-item">{{user.AppUser}} <span *ngIf="renderizarSino(user)" class="badge bg-red">{{user.QtdeMsgNaoVisualizadas}}</span> </li>
+                  <div class="col-md-9">
+                    <li class="list-group-item">{{user.AppUser}} <span *ngIf="renderizarSino(user)" class="badge bg-red">{{user.QtdeMsgNaoVisualizadas}}</span> </li>
                   </div>
-
               </div>
+           
             </a>
         </ul>
         
