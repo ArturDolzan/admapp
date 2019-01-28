@@ -6,6 +6,7 @@ import { HubsService } from 'src/app/shared/hubs/hubs.service';
 import { tap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { URL_HUB } from '../../app.config';
+import { PushNotificationsService } from '../../shared/messages/push-notification.service';
 
 @Component({
   selector: 'app-chat',
@@ -20,7 +21,10 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService,
               private notificationService: NotificationService,
               private hubsService: HubsService,
-              private router: Router) { }
+              private router: Router,
+              private pushNotificationsService: PushNotificationsService) { 
+                this.pushNotificationsService.requestPermission()
+              }
 
   ngOnInit() {
     
@@ -36,6 +40,8 @@ export class ChatComponent implements OnInit {
 
     
     this.servicoPublicarAudioChat = this.hubsService.publicarParaUsuario.pipe( tap(mensagem=>{
+
+        this.pushNotification(mensagem.UsuarioOrigem, mensagem.Mensagem)
         this.listarLogados()
       
     })).subscribe() 
@@ -88,6 +94,16 @@ export class ChatComponent implements OnInit {
 
   renderizaNinguemOnline() {
     return this.qtdeLogados() === 0 ? true : false
+  }
+
+  pushNotification(usuario: string, mensagem: string) {
+    let data: Array < any >= [];
+        data.push({
+            'title': 'Chat de ' + usuario,
+            'alertContent': mensagem
+        });
+
+      this.pushNotificationsService.generateNotification(data);
   }
 
 }

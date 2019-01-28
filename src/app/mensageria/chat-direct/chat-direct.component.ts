@@ -23,7 +23,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
               private servUserLogin: ServUserLogin,
               private formBuilder: FormBuilder,
               private pushNotificationsService: PushNotificationsService ) {
-                this.pushNotificationsService.requestPermission();
+                this.pushNotificationsService.requestPermission()
               }
 
   cadForm: FormGroup        
@@ -225,7 +225,7 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
         this.marcarMensagensVisualizadas()
       }else{
         this.pushNotification(chat.UsuarioOrigem, chat.Mensagem)
-      }
+      }      
     }    
   }
 
@@ -293,6 +293,8 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
             'title': 'Chat de ' + usuario,
             'alertContent': mensagem
         });
+
+      this.pushNotificationsService.generateNotification(data);
   }
 
   @HostListener('window:keydown', ['$event'])
