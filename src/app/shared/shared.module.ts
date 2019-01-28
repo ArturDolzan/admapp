@@ -16,6 +16,7 @@ import { BotoescadastroComponent } from './botoescadastro/botoescadastro.compone
 import { ChatComponent } from '../mensageria/chat/chat.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { HubsService } from './hubs/hubs.service';
+import { PushNotificationsService } from './messages/push-notification.service';
 
 @NgModule({
   declarations: [InputComponent,
@@ -66,7 +67,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers:[NotificationService, HubsService]
+      providers:[NotificationService, HubsService, PushNotificationsService]
     }
   }
 }

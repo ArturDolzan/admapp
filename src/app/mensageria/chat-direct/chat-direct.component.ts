@@ -8,6 +8,7 @@ import { fromEvent } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { URL_HUB } from '../../app.config';
 import { ServUserLogin } from '../../header/user-login/user-login.service';
+import { PushNotificationsService } from '../../shared/messages/push-notification.service';
 
 @Component({
   selector: 'app-chat-direct',
@@ -20,7 +21,10 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
               private chatDirectService: ChatDirectService,
               private notificationService: NotificationService,
               private servUserLogin: ServUserLogin,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private pushNotificationsService: PushNotificationsService ) {
+                this.pushNotificationsService.requestPermission();
+              }
 
   cadForm: FormGroup        
   //@ViewChildren('mensagem') vcMensagem;
@@ -219,6 +223,8 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
       if(this.focoMensagem){
         this.chatDirectService.enviarVisualizado(this.chatDirectService.recuperarUsuarioLogado(), this.appUserDestino)
         this.marcarMensagensVisualizadas()
+      }else{
+        this.pushNotification(chat.UsuarioOrigem, chat.Mensagem)
       }
     }    
   }
@@ -279,6 +285,14 @@ export class ChatDirectComponent implements OnInit, AfterViewInit {
     for (j in this.chatDirect) {
       this.chatDirect[j].Visualizado = EnumChatVisualizado.Viualizado;
     }
+  }
+
+  pushNotification(usuario: string, mensagem: string) {
+    let data: Array < any >= [];
+        data.push({
+            'title': 'Chat de ' + usuario,
+            'alertContent': mensagem
+        });
   }
 
   @HostListener('window:keydown', ['$event'])
